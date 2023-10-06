@@ -1,0 +1,11 @@
+#!/usr/bin/python3
+
+import random
+import subprocess
+from pathlib import Path
+
+wallpapers = Path("/usr/share/backgrounds/")
+random_wallpaper = random.choice(list(wallpapers.glob("*.jpg")))
+
+subprocess.run(["feh", "--bg-scale", f"{str(random_wallpaper)}"])
+subprocess.run(["setxkbmap", "-option", "caps:swapescape"])
