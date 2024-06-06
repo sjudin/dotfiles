@@ -1,0 +1,29 @@
+#!/bin/zsh
+
+alias bssh='TERM=xterm-color ssh -X debian@192.168.7.2'
+alias vim='nvim'
+
+bscp() {
+    scp -r "$1" 'debian@192.168.7.2:~/'
+}
+alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
+alias rr='ranger'
+
+cd_and_source_venv() {
+    cd $1
+    local INVENV=$(python3 -c 'import sys; print ("1" if hasattr(sys, "real_prefix") or (sys.base_prefix != sys.prefix) else "0")')
+    if [[ $INVENV == 1 ]]; then
+        echo "Detected active venv, deactivating"
+        deactivate
+    fi
+    echo "Activating venv"
+    source venv/bin/activate
+}
+
+alias l2='cd_and_source_venv ~/git/l2-sp'
+alias lv='cd_and_source_venv ~/git/lvo_src2'
+alias xb='cd_and_source_venv ~/git/x-band'
+
+alias i3conf='nvim ~/.config/i3/config'
+
+alias matlab='matlab & disown'
