@@ -23,10 +23,10 @@ export LANGUAGE="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
 # NVIM config path
-export NVIMRC="/home/jakob/.config/nvim/init.lua"
+export NVIMRC="$HOME/.config/nvim/init.lua"
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/jakob/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 xset r rate 300 40
 
@@ -127,11 +127,12 @@ alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-source /usr/share/doc/fzf/examples/key-bindings.zsh
-source /usr/share/doc/fzf/examples/completion.zsh
 
 source $HOME/.aliases
 
