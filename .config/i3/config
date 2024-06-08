@@ -253,15 +253,15 @@ exec_always --no-startup-id "bash ~/.config/i3/tray.sh"
 # Picom for corners, transparency and animations
 exec --no-startup-id picom -f -i 0.93 -D 2 -b --opacity-rule "100:class_g='i3lock'"
 
-exec --no-startup-id i3-msg 'workspace $ws1;exec i3-sensible-terminal -e nvim'
-exec --no-startup-id i3-msg 'workspace $ws2;exec i3-sensible-terminal'
-exec --no-startup-id i3-msg 'workspace $ws8;exec i3-sensible-terminal -e bpytop'
-exec --no-startup-id google-chrome
-exec --no-startup-id slack
-exec --no-startup-id spotify
+# exec --no-startup-id i3-msg 'workspace $ws1;exec i3-sensible-terminal -e nvim'
+# exec --no-startup-id i3-msg 'workspace $ws2;exec i3-sensible-terminal'
+# exec --no-startup-id i3-msg 'workspace $ws8;exec i3-sensible-terminal -e bpytop'
+# exec --no-startup-id google-chrome
+# exec --no-startup-id slack
+# exec --no-startup-id spotify
 
-assign [class="Google-chrome"] $ws5
-assign [class="firefox"] $ws5
-assign [class="Slack"] $ws9
-assign [class="Spotify"] $ws10
+# assign [class="Google-chrome"] $ws5
+# assign [class="firefox"] $ws5
+# assign [class="Slack"] $ws9
+# assign [class="Spotify"] $ws10
 
