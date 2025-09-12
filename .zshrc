@@ -13,10 +13,11 @@ export EDITOR=nvim;
 
 # Use clang and clang++ instead of gcc
 export CC=$(realpath `which clang`)
-export CXX=$(realpath `which clang++`)++
+export CXX=$(realpath `which clang++`)
 export LD=/usr/bin/lld
 
-export FZF_DEFAULT_COMMAND='fdfind --type file --hidden --follow --color=always --exclude={.cache,.git,build,.clangd}'
+# export FZF_DEFAULT_COMMAND='fdfind --type file --hidden --follow --color=always --exclude={.cache,.git,build,.clangd}'
+export FZF_DEFAULT_COMMAND='fdfind --type f --strip-cwd-prefix --hidden --follow --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 export LANGUAGE="en_US.UTF-8"
@@ -122,8 +123,6 @@ source $ZSH/oh-my-zsh.sh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
-# Example aliases
-alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -133,6 +132,13 @@ source <(fzf --zsh)
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
 
 source $HOME/.aliases
 

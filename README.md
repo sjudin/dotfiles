@@ -12,9 +12,9 @@ this will symlink all the config files.
 
 These are the things that I use:
 - [zsh](https://www.zsh.org/)
-- [alacritty](https://github.com/alacritty/alacritty)
+- [ghostty](https://ghostty.org/)
 - [tmux](https://github.com/tmux/tmux/wiki)
 - [i3](https://i3wm.org/)
-- [ranger](https://github.com/ranger/ranger)
+- [yazi](https://yazi-rs.github.io/)
 - [fzf](https://github.com/junegunn/fzf)
 - [p10k](https://github.com/romkatv/powerlevel10k)
