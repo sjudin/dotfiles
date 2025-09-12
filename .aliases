@@ -1,13 +1,6 @@
 #!/bin/zsh
 
-alias bssh='TERM=xterm-color ssh -X debian@192.168.7.2'
 alias vim='nvim'
-
-bscp() {
-    scp -r "$1" 'debian@192.168.7.2:~/'
-}
-alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
-alias rr='ranger'
 
 cd_and_source_venv() {
     cd $1

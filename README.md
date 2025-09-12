@@ -12,9 +12,10 @@ this will symlink all the config files.
 
 These are the things that I use:
 - [zsh](https://www.zsh.org/)
+- [oh-my-zsh](https://ohmyposh.dev/)
+- [oh-my-posh](https://ohmyz.sh/)
 - [ghostty](https://ghostty.org/)
 - [tmux](https://github.com/tmux/tmux/wiki)
 - [i3](https://i3wm.org/)
 - [yazi](https://yazi-rs.github.io/)
 - [fzf](https://github.com/junegunn/fzf)
-- [p10k](https://github.com/romkatv/powerlevel10k)

@@ -1,0 +1,56 @@
+version = 3
+final_space = true
+
+[upgrade]
+  source = 'cdn'
+  interval = '168h'
+  auto = false
+  notice = false
+
+[[blocks]]
+  type = 'rprompt'
+
+  [[blocks.segments]]
+    template = '{{ if .Error }}{{ if ne .Code 130 }}{{ .Code }}{{ end }}{{ end }}'
+    # foreground = '#C94A16'
+    foreground = '#fb4934'
+    type = 'status'
+    style = 'plain'
+
+  [[blocks.segments]]
+    type = 'python'
+    template = '{{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }} ({{ .Venv }}) {{ end }}{{ end }}'
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+
+  
+  [[blocks.segments]]
+  type = 'session'
+  foreground = '#dfbf8e'
+  template = '{{ if .SSHSession }}{{ .UserName }}@{{ .HostName }}{{ end }}'
+  style = 'powerline'
+
+  [[blocks.segments]]
+    template = '{{ .Path }} '
+    type = 'path'
+    style = 'plain'
+
+    [blocks.segments.properties]
+      # folder_separator_template = '<#458588>/'
+      style = 'full'
+      cycle = [ '#fbf1c7', "#dfbf8e"]
+
+  [[blocks.segments]]
+    template = '{{ .HEAD }} '
+    foreground = '#C2C206'
+    type = 'git'
+    style = 'plain'
+
+  [[blocks.segments]]
+    template = '❯'
+    foreground = '#4088b8'
+    type = 'text'
+    style = 'plain'
+
