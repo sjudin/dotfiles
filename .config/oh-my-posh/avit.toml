@@ -1,5 +1,15 @@
 version = 3
 final_space = true
+enable_cursor_positioning = true
+
+[transient_prompt]
+  type = 'text'
+  style = 'plain'
+  template = '❯ '
+  foreground_templates = [
+    "{{if eq .Code 0}}p:dark-blue{{else}}red{{end}}",
+  ]
+
 
 [upgrade]
   source = 'cdn'
@@ -7,8 +17,42 @@ final_space = true
   auto = false
   notice = false
 
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+  newline = true
+
+  [[blocks.segments]]
+    type = 'session'
+    foreground = '#dfbf8e'
+    template = '{{ if .SSHSession }}{{ .UserName }}@{{ .HostName }}{{ end }}'
+    style = 'powerline'
+
+  [[blocks.segments]]
+    template = '{{ .Path }} '
+    type = 'path'
+    style = 'plain'
+
+    [blocks.segments.properties]
+      # folder_separator_template = '<#458588>/'
+      style = 'full'
+      cycle = [ '#fbf1c7', "#dfbf8e"]
+
+  [[blocks.segments]]
+    type = 'git'
+    style = 'plain'
+    foreground = 'grey'
+    template = '{{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}*{{ end }} {{ if gt .Behind 0 }}⇣{{ end }}{{ if gt .Ahead 0 }}⇡{{ end }}</>'
+
+    [blocks.segments.properties]
+      branch_icon = ''
+      commit_icon = '@'
+      fetch_status = true
+
 [[blocks]]
   type = 'rprompt'
+  overflow = 'hidden'
 
   [[blocks.segments]]
     template = '{{ if .Error }}{{ if ne .Code 130 }}{{ .Code }}{{ end }}{{ end }}'
@@ -24,33 +68,16 @@ final_space = true
 [[blocks]]
   type = 'prompt'
   alignment = 'left'
-
+  newline=true
   
   [[blocks.segments]]
-  type = 'session'
-  foreground = '#dfbf8e'
-  template = '{{ if .SSHSession }}{{ .UserName }}@{{ .HostName }}{{ end }}'
-  style = 'powerline'
-
-  [[blocks.segments]]
-    template = '{{ .Path }} '
-    type = 'path'
-    style = 'plain'
-
-    [blocks.segments.properties]
-      # folder_separator_template = '<#458588>/'
-      style = 'full'
-      cycle = [ '#fbf1c7', "#dfbf8e"]
-
-  [[blocks.segments]]
-    template = '{{ .HEAD }} '
-    foreground = '#C2C206'
-    type = 'git'
-    style = 'plain'
-
-  [[blocks.segments]]
-    template = '❯'
-    foreground = '#4088b8'
     type = 'text'
     style = 'plain'
+    template = '❯'
+    foreground_templates = [
+      "{{if eq .Code 0}}p:dark-blue{{else}}red{{end}}",
+    ]
 
+
+[palette]
+dark-blue = "#4088b8"

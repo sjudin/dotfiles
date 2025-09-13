@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+alias ls='ls --color'
+
 alias vim='nvim'
 
 cd_and_source_venv() {
