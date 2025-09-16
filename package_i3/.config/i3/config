@@ -16,8 +16,7 @@ set $mod Mod1
 # is used in the bar {} block below.
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-# font pango:Hack Nerd Font Mono 8
-font pango:JetBrains Mono 10
+font pango: JetBrains Mono, Symbols Nerd Font Mono 11
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # The font above is very space-efficient, that is, it looks good, sharp and
@@ -35,7 +34,8 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+Q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec dmenu_run -fn 'JetBrains Mono-11'
+
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -189,7 +189,6 @@ bar {
     }
 
     tray_output primary
-    font pango:Hack Nerd Font Mono 10
     status_command i3status
 
 }
@@ -200,16 +199,12 @@ bindsym $mod+z move workspace to output left
 bindsym $mod+x move workspace to output up
 
 # i3lock shortcut
-# bindsym $mod+o exec "xscreensaver-command --lock"
 bindsym $mod+o exec "xautolock -locknow"
 
 # Volume control
-# bindsym XF86AudioRaiseVolume exec "amixer set Master 500+"
-# bindsym XF86AudioLowerVolume exec "amixer set Master 500-"
-# bindsym XF86AudioMute exec "amixer -q sset Master,0 toggle"
-bindsym XF86AudioMute exec "pactl set-sink-mute 1 toggle"
-bindsym XF86AudioRaiseVolume exec "amixer -q sset Master,0 3+ unmute"
-bindsym XF86AudioLowerVolume exec "amixer -q sset Master,0 3- unmute"
+bindsym $mod+XF86AudioMute exec "amixer -q sset Master,0 toggle"
+bindsym $mod+XF86AudioRaiseVolume exec "amixer -q sset Master 5%+"
+bindsym $mod+XF86AudioLowerVolume exec "amixer -q sset Master 5%-"
 
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play
@@ -219,16 +214,14 @@ bindsym XF86AudioPrev exec playerctl previous
 
 
 # Brightness 
-bindsym XF86MonBrightnessDown exec "brightnessctl -q -d intel_backlight set 10%-"
-bindsym XF86MonBrightnessUp exec "brightnessctl -q -d intel_backlight set 10%+"
+bindsym $mod+XF86MonBrightnessDown exec "brightnessctl -q -d intel_backlight set 10%-"
+bindsym $mod+XF86MonBrightnessUp exec "brightnessctl -q -d intel_backlight set 10%+"
 
 focus_follows_mouse yes
 
 # Screen saver
 exec_always --no-startup-id xautolock -exit
 exec_always --no-startup-id xautolock -detectsleep -time 2 -locker '~/scripts/fuzzy_lock.sh' -corners '--00' -killer 'systemctl suspend' -killtime 60 &
-# exec --no-startup-id xscreensaver-command -exit
-# exec --no-startup-id xscreensaver -nosplash
 
 # Dunst
 exec killall -q xfce4-notifyd
@@ -241,25 +234,18 @@ for_window [class="MATLABWindow"] floating enable
 workspace_auto_back_and_forth yes
 
 # Screenshot
-bindsym Print exec "gnome-screenshot -i"
-bindsym $mod+Print exec "gnome-screenshot -a"
+bindsym Print exec "flameshot gui"
 
 ###### Startup ######
-exec_always --no-startup-id "setxkbmap -option caps:swapescape"
-exec_always --no-startup-id "~/.config/autorandr/postswitch"
-
 # Start tray processes
 exec_always --no-startup-id "bash ~/.config/i3/tray.sh"
 
+# wallpaper
+exec_always sh $HOME/.fehbg
+
+
 # Picom for corners, transparency and animations
 exec --no-startup-id picom -f -i 0.93 -D 2 -b --opacity-rule "100:class_g='i3lock'"
-
-# exec --no-startup-id i3-msg 'workspace $ws1;exec i3-sensible-terminal -e nvim'
-# exec --no-startup-id i3-msg 'workspace $ws2;exec i3-sensible-terminal'
-# exec --no-startup-id i3-msg 'workspace $ws8;exec i3-sensible-terminal -e bpytop'
-# exec --no-startup-id google-chrome
-# exec --no-startup-id slack
-# exec --no-startup-id spotify
 
 # assign [class="Google-chrome"] $ws5
 # assign [class="firefox"] $ws5

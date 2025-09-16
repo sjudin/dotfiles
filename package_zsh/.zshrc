@@ -1,3 +1,8 @@
+# zmodload zsh/zprof
+
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+
 xset r rate 300 40
 
 function y() {
@@ -9,7 +14,7 @@ function y() {
 }
 
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:/usr/local/go/bin:$PATH
+export PATH=$HOME/.local/bin:$HOME/bin:/usr/local/bin:/usr/local/go/bin:$PATH
 
 export VISUAL=nvim;
 export EDITOR=nvim;
@@ -71,10 +76,17 @@ zinit snippet OMZP::git
 zinit snippet OMZP::command-not-found
 zinit snippet OMZP::colored-man-pages
 
-zinit light zsh-users/zsh-syntax-highlighting
+zinit light zdharma-continuum/fast-syntax-highlighting
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-completions
 zinit light Aloxaf/fzf-tab
 
-autoload -Uz compinit && compinit
-zinit cdreplay -q
+zinit wait lucid for \
+ atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+    zdharma-continuum/fast-syntax-highlighting \
+ blockf \
+    zsh-users/zsh-completions \
+ atload"!_zsh_autosuggest_start" \
+    zsh-users/zsh-autosuggestions   
+
+# zprof

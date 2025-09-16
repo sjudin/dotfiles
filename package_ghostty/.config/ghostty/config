@@ -1,10 +1,10 @@
 theme = gruvbox-custom
 
-# font-family = Hack Nerd Font Mono
 font-family = JetBrains Mono
 font-size = 13.0
 
 cursor-style = block
+cursor-style-blink = false
 adjust-cursor-thickness=1
 shell-integration-features = no-cursor
 

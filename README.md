@@ -2,13 +2,22 @@
 
 # Installing
 
-First, clone this repository in $HOME. Then install [stow](https://www.gnu.org/software/stow/manual/stow.html) and run
+First, clone this repository. Then install [stow](https://www.gnu.org/software/stow/manual/stow.html) and run
 ```
-cd $HOME/dotfiles && stow .
+cd <dotfiles/repo/path> && stow -v -t "$HOME" package*
 ```
+or if you want to individually choose the packages:
+```
+cd <dotfiles/repo/path> && stow -v -t "$HOME" <package1> <package2> ...
+```
+
 this will symlink all the config files.
 
 # What to install next
+
+Fonts:
+- [JetBrains Mono](https://www.jetbrains.com/lp/mono/)
+- [Symbols Nerd Font](https://www.nerdfonts.com/)
 
 These are the things that I use:
 - [zsh](https://www.zsh.org/)
@@ -18,5 +27,8 @@ These are the things that I use:
 - [tmux](https://github.com/tmux/tmux/wiki)
 - [i3](https://i3wm.org/)
   - [picom](https://github.com/yshui/picom)
+  - [feh](https://github.com/derf/feh)
+  - [flameshot](https://flameshot.org/)
+  - [xautolock](https://linux.die.net/man/1/xautolock)
 - [yazi](https://yazi-rs.github.io/)
 - [fzf](https://github.com/junegunn/fzf)
