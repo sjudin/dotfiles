@@ -15,6 +15,8 @@ cd_and_source_venv() {
     source venv/bin/activate
 }
 
+alias tt='base_dir=$(fdfind -t d -H | fzf) && tmux new-session -c $base_dir -As $(basename $base_dir)'
+
 alias l2='cd_and_source_venv ~/git/l2-sp'
 alias lv='cd_and_source_venv ~/git/lvo_src2'
 alias xb='cd_and_source_venv ~/git/x-band'
