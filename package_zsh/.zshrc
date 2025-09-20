@@ -17,7 +17,7 @@ t() {
     if [ $TERM_PROGRAM = tmux ]; then
         local tmux_session=$(tmux list-sessions -F '#{session_name}' | fzf)
         if [ -n "$tmux_session" ]; then
-            xargs tmux switch -t "$tmux_session"
+            tmux switch -t "$tmux_session"
         fi
     else
         local full_path=$(fdfind -t d -H | fzf)
