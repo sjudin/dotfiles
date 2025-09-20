@@ -13,6 +13,22 @@ function y() {
 	rm -f -- "$tmp"
 }
 
+t() {
+    if [ $TERM_PROGRAM = tmux ]; then
+        local tmux_session=$(tmux list-sessions -F '#{session_name}' | fzf)
+        if [ -n "$tmux_session" ]; then
+            xargs tmux switch -t "$tmux_session"
+        fi
+    else
+        local full_path=$(fdfind -t d -H | fzf)
+        local hashed_path=$(echo "$full_path" | md5sum | head -zc 4; printf "\n")
+        local base_dir=$(basename "$full_path")
+        if [ -n "$full_path" ]; then
+            tmux new-session -c "$full_path" -As $(basename "${base_dir}-${hashed_path}")
+        fi
+    fi
+}
+
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/.local/bin:$HOME/bin:/usr/local/bin:/usr/local/go/bin:$PATH
 
