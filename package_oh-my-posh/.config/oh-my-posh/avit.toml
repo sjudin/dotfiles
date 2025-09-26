@@ -27,7 +27,7 @@ enable_cursor_positioning = true
     type = 'session'
     foreground = '#dfbf8e'
     template = '{{ if .SSHSession }}{{ .UserName }}@{{ .HostName }}{{ end }} '
-    style = 'powerline'
+    style = 'plain'
 
   [[blocks.segments]]
     template = '{{ .Path }} '
