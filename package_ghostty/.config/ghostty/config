@@ -12,3 +12,5 @@ mouse-hide-while-typing = true
 window-decoration = false
 
 confirm-close-surface = false
+custom-shader = shaders/cursor_blaze_2.glsl
+custom-shader = shaders/cursor_smear_fade_2.glsl
