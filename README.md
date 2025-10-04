@@ -29,6 +29,6 @@ These are the things that I use:
   - [picom](https://github.com/yshui/picom)
   - [feh](https://github.com/derf/feh)
   - [flameshot](https://flameshot.org/)
-  - [xautolock](https://linux.die.net/man/1/xautolock)
+  - [xidlehook](https://docs.rs/crate/xidlehook/0.7.1)
 - [yazi](https://yazi-rs.github.io/)
 - [fzf](https://github.com/junegunn/fzf)

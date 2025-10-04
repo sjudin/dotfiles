@@ -199,7 +199,8 @@ bindsym $mod+z move workspace to output left
 bindsym $mod+x move workspace to output up
 
 # i3lock shortcut
-bindsym $mod+o exec "xautolock -locknow"
+bindsym $mod+o exec xidlehook-client --socket /tmp/xidlehook.sock control --action trigger --timer 1
+
 
 # Volume control
 bindsym $mod+XF86AudioMute exec "amixer -q sset Master,0 toggle"
@@ -220,8 +221,8 @@ bindsym $mod+XF86MonBrightnessUp exec "brightnessctl -q -d intel_backlight set 1
 focus_follows_mouse yes
 
 # Screen saver
-exec_always --no-startup-id xautolock -exit
-exec_always --no-startup-id xautolock -detectsleep -time 2 -locker '~/scripts/fuzzy_lock.sh' -corners '--00' -killer 'systemctl suspend' -killtime 60 &
+exec_always --no-startup-id pkill xidlehook
+exec_always --no-startup-id ~/scripts/start_xidlehook.sh
 
 # Dunst
 exec killall -q xfce4-notifyd
