@@ -6,7 +6,8 @@ font-size = 13.0
 cursor-style = block
 cursor-style-blink = false
 adjust-cursor-thickness=1
-shell-integration-features = no-cursor
+shell-integration-features = no-cursor,ssh-terminfo,ssh-env
+clipboard-trim-trailing-spaces = true
 
 mouse-hide-while-typing = true
 window-decoration = false
