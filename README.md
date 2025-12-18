@@ -32,3 +32,7 @@ These are the things that I use:
   - [xidlehook](https://docs.rs/crate/xidlehook/0.7.1)
 - [yazi](https://yazi-rs.github.io/)
 - [fzf](https://github.com/junegunn/fzf)
+- [lightdm](https://github.com/canonical/lightdm)
+  - [lightdm-gtk-greeter](https://github.com/Xubuntu/lightdm-gtk-greeter)
+  - [unity-greeter](https://launchpad.net/ubuntu/+source/unity-greeter)
+- [tlp](https://linrunner.de/tlp/index.html)
