@@ -15,6 +15,14 @@ cd_and_source_venv() {
     source venv/bin/activate
 }
 
+oil_ssh() {
+    if [ -z ${1} ]; then
+        echo "Missing argument (usage: ossh user@hostname[/path])"
+        return
+    fi
+    nvim oil-ssh://${1}${2:-/}
+}
+
 alias l2='cd_and_source_venv ~/git/l2-sp'
 alias lv='cd_and_source_venv ~/git/lvo_src2'
 alias xb='cd_and_source_venv ~/git/x-band'
@@ -22,3 +30,4 @@ alias xb='cd_and_source_venv ~/git/x-band'
 alias i3conf='nvim ~/.config/i3/config'
 
 alias matlab='matlab & disown'
+alias ossh='oil_ssh'
