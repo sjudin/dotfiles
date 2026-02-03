@@ -28,7 +28,7 @@ font pango: JetBrains Mono, Symbols Nerd Font Mono 11
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec ghostty
 
 # kill focused window
 bindsym $mod+Shift+Q kill
@@ -95,16 +95,26 @@ bindsym $mod+q focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
-set $ws1 1: 
-set $ws2 2: 
+# set $ws1 1: 
+# set $ws2 2: 
+# set $ws3 3
+# set $ws4 4
+# set $ws5 5: 
+# set $ws6 6
+# set $ws7 7
+# set $ws8 8
+# set $ws9 9: 
+# set $ws10 10: 
+set $ws1 1
+set $ws2 2
 set $ws3 3
 set $ws4 4
-set $ws5 5: 
+set $ws5 5
 set $ws6 6
 set $ws7 7
 set $ws8 8
-set $ws9 9: 
-set $ws10 10: 
+set $ws9 9
+set $ws10 10
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -130,13 +140,32 @@ bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
 
+# default layout
+input type:keyboard {
+  xkb_layout se(nodeadkeys)
+  # xkb_layout se
+  repeat_delay 300
+  repeat_rate 40
+}
+
+# Swap caps/esc on standard keyboards
+input "1:1:AT_Translated_Set_2_keyboard" {
+   xkb_options caps:swapescape
+}
+
+
+# Lid open/closed behaviour. If no external screen is connected, suspend. If
+# one or more screens are connected then we disable the laptop screen (clamshell mode)
+bindswitch --reload --locked lid:on exec ~/scripts/lid_action.sh closed
+bindswitch --reload --locked lid:off exec ~/scripts/lid_action.sh open
+# When in clamshell mode we do not want to re-enable the laptop
+# display when sway is reloaded, this script handles that
+exec_always ~/scripts/lid_event_handler.sh
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-
+bindsym $mod+Shift+e exec "swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit Sway? This will end your session.' -b 'Yes, exit Sway' 'swaymsg exit'"
 
 client.focused          #665c54 #665c54 #eddbb2 #2e9ef4   #665c54
 client.focused_inactive #282828 #5f676a #ffffff #484e50   #5f676a
@@ -171,8 +200,6 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
 bar {
 	colors {
 		# Whole color settings
@@ -180,7 +207,7 @@ bar {
 		statusline #ebdbb2
 		separator  #666666
 
-		
+
 		focused_workspace  #458588 #458588 #ebdbb2
 		active_workspace   #83a598 #83a598 #ebdbb2
 		inactive_workspace #504945 #504945 #ebdbb2
@@ -189,23 +216,20 @@ bar {
     }
 
     tray_output primary
-    status_command i3status
-
+    swaybar_command waybar
 }
-# $i3-theme-window
 
 # move workspace across screens
 bindsym $mod+z move workspace to output left
 bindsym $mod+x move workspace to output up
 
-# i3lock shortcut
-bindsym $mod+o exec xidlehook-client --socket /tmp/xidlehook.sock control --action trigger --timer 1
-
+# lock screen
+bindsym $mod+o exec hyprlock --immediate-render
 
 # Volume control
-bindsym $mod+XF86AudioMute exec "amixer -q sset Master,0 toggle"
-bindsym $mod+XF86AudioRaiseVolume exec "amixer -q sset Master 5%+"
-bindsym $mod+XF86AudioLowerVolume exec "amixer -q sset Master 5%-"
+bindsym XF86AudioMute exec "wpctl set-mute @DEFAULT_SINK@ toggle"
+bindsym XF86AudioRaiseVolume exec "wpctl set-volume @DEFAULT_SINK@ 5%+"
+bindsym XF86AudioLowerVolume exec "wpctl set-volume @DEFAULT_SINK@ 5%-"
 
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play
@@ -213,20 +237,23 @@ bindsym XF86AudioPause exec playerctl pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
-
 # Brightness 
-bindsym $mod+XF86MonBrightnessDown exec "brightnessctl -q -d intel_backlight set 10%-"
-bindsym $mod+XF86MonBrightnessUp exec "brightnessctl -q -d intel_backlight set 10%+"
+bindsym XF86MonBrightnessDown exec "brightnessctl -q -d intel_backlight set 10%-"
+bindsym XF86MonBrightnessUp exec "brightnessctl -q -d intel_backlight set 10%+"
 
 focus_follows_mouse yes
 
 # Screen saver
-exec_always --no-startup-id pkill xidlehook
-exec_always --no-startup-id ~/scripts/start_xidlehook.sh
+exec swayidle -w \
+                timeout 60 'chayang -d 8 && (hyprlock --immediate-render -q&)' \
+                timeout 60 'swaymsg "output * power off"' \
+                     resume 'swaymsg "output * power on"' \
+                before-sleep '(hyprlock --immediate-render -q&)' \
+                timeout 60 'brightnessctl -d 'tpacpi::kbd_backlight' get > /tmp/kbd_backlight_state && brightnessctl -d 'tpacpi::kbd_backlight' set 0' \
+                    resume 'brightnessctl -d 'tpacpi::kbd_backlight' set $(cat /tmp/kbd_backlight_state)'
 
-# Dunst
-exec killall -q xfce4-notifyd
-exec --no-startup-id dunst -config ~/.config/i3/dunstrc
+# Notification Daemon (swaync)
+exec swaync
 
 # Floating windows
 for_window [instance="gimp"] floating enable
@@ -235,21 +262,15 @@ for_window [class="MATLABWindow"] floating enable
 workspace_auto_back_and_forth yes
 
 # Screenshot
-bindsym Print exec "flameshot gui"
+bindsym Print exec 'grim -g "$(slurp)" -t png - | wl-copy'
+
+# Set opacity for un-forcused windows
+exec ~/scripts/inactive_windows_transparency.py
 
 ###### Startup ######
 # Start tray processes
-exec_always --no-startup-id "bash ~/.config/i3/tray.sh"
+exec_always --no-startup-id "bash ~/.config/sway/tray.sh"
 
 # wallpaper
-exec_always sh $HOME/.fehbg
-
-
-# Picom for corners, transparency and animations
-exec --no-startup-id picom -f -i 0.93 -D 2 -b --opacity-rule "100:class_g='i3lock'"
-
-# assign [class="Google-chrome"] $ws5
-# assign [class="firefox"] $ws5
-# assign [class="Slack"] $ws9
-# assign [class="Spotify"] $ws10
+exec_always swaybg -i ~/wallpaper.png
 

@@ -1,2 +1,12 @@
 [mgr]
 linemode = "size"
+
+[opener]
+imv_open = [
+	{ run = "imv %s", desc = "Open" },
+]
+
+[open]
+prepend_rules = [
+	{ mime="image/*", use = [ "imv_open", "reveal" ] }
+]

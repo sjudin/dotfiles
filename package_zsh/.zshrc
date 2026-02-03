@@ -3,8 +3,6 @@
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 
-xset r rate 300 40
-
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
 	yazi "$@" --cwd-file="$tmp"
@@ -14,7 +12,7 @@ function y() {
 }
 
 new_tmux_session() {
-    local full_path=$(fdfind -t d -H "" "${1:-$HOME}" | fzf)
+    local full_path=$(fd -t d -H "" "${1:-$HOME}" | fzf)
     if [ -z "$full_path" ]; then
         return 0
     fi
@@ -136,3 +134,5 @@ zinit wait lucid for \
     zsh-users/zsh-autosuggestions   
 
 # zprof
+
+fastfetch
