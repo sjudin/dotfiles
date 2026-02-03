@@ -37,6 +37,7 @@ These are the things that I use:
 - [yazi](https://yazi-rs.github.io/)
   - [imv](https://git.sr.ht/~exec64/imv/)
 - [fzf](https://github.com/junegunn/fzf)
+- [keychain](https://github.com/danielrobbins/keychain)
 - [lightdm](https://github.com/canonical/lightdm)
   - [lightdm-gtk-greeter](https://github.com/Xubuntu/lightdm-gtk-greeter)
 

@@ -100,6 +100,8 @@ source <(fzf --zsh)
 
 source $HOME/.aliases
 
+eval $(keychain --eval id_ed25519 --quiet)
+
 eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/avit.toml)"
 
 ### Added by Zinit's installer
