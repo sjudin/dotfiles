@@ -30,6 +30,7 @@ These are the things that I use:
   - [slurp](https://github.com/emersion/slurp)
   - [waybar](https://github.com/Alexays/Waybar)
   - [hyprlock](https://wiki.hypr.land/Hypr-Ecosystem/hyprlock/)
+  - [hypridle](https://wiki.hypr.land/Hypr-Ecosystem/hypridle/)
   - [chayang](https://gitlab.freedesktop.org/emersion/chayang)
   - [swaync](https://github.com/ErikReider/SwayNotificationCenter)
   - [arch-update](https://github.com/Antiz96/arch-update)

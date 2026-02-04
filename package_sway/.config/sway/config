@@ -244,16 +244,13 @@ bindsym XF86MonBrightnessUp exec "brightnessctl -q -d intel_backlight set 10%+"
 focus_follows_mouse yes
 
 # Screen saver
-exec swayidle -w \
-                timeout 60 'chayang -d 8 && (hyprlock --immediate-render -q&)' \
-                timeout 60 'swaymsg "output * power off"' \
-                     resume 'swaymsg "output * power on"' \
-                before-sleep '(hyprlock --immediate-render -q&)' \
-                timeout 60 'brightnessctl -d 'tpacpi::kbd_backlight' get > /tmp/kbd_backlight_state && brightnessctl -d 'tpacpi::kbd_backlight' set 0' \
-                    resume 'brightnessctl -d 'tpacpi::kbd_backlight' set $(cat /tmp/kbd_backlight_state)'
+exec hypridle
 
 # Notification Daemon (swaync)
 exec swaync
+
+# polkit agent
+exec systemctl --user status hyprpolkitagent.service
 
 # Floating windows
 for_window [instance="gimp"] floating enable
