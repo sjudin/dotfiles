@@ -136,5 +136,3 @@ zinit wait lucid for \
     zsh-users/zsh-autosuggestions   
 
 # zprof
-
-fastfetch
