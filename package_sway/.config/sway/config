@@ -224,7 +224,7 @@ bindsym $mod+z move workspace to output left
 bindsym $mod+x move workspace to output up
 
 # lock screen
-bindsym $mod+o exec hyprlock --immediate-render
+bindsym $mod+o exec ~/scripts/lock-manager.sh
 
 # Volume control
 bindsym XF86AudioMute exec "wpctl set-mute @DEFAULT_SINK@ toggle"
