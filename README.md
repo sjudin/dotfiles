@@ -18,6 +18,7 @@ this will symlink all the config files.
 Fonts:
 - [JetBrains Mono](https://www.jetbrains.com/lp/mono/)
 - [Symbols Nerd Font](https://www.nerdfonts.com/)
+- [Noto](https://fonts.google.com/noto)
 
 These are the things that I use:
 - [zsh](https://www.zsh.org/)
