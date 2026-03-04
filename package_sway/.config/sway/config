@@ -16,7 +16,7 @@ set $mod Mod1
 # is used in the bar {} block below.
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango: JetBrains Mono, Symbols Nerd Font Mono 11
+font pango: JetBrainsMono Nerd Font 11
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # The font above is very space-efficient, that is, it looks good, sharp and
@@ -34,7 +34,7 @@ bindsym $mod+Return exec ghostty
 bindsym $mod+Shift+Q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run -fn 'JetBrains Mono-11'
+bindsym $mod+d exec j4-dmenu-desktop --dmenu="dmenu -i -fn 'JetBrainsMono Nerd Font-11'"
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that

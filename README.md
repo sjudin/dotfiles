@@ -16,8 +16,7 @@ this will symlink all the config files.
 # What to install next
 
 Fonts:
-- [JetBrains Mono](https://www.jetbrains.com/lp/mono/)
-- [Symbols Nerd Font](https://www.nerdfonts.com/)
+- [JetBrains Mono Nerd Font](https://archlinux.org/packages/extra/any/ttf-jetbrains-mono-nerd/)
 - [Noto](https://fonts.google.com/noto)
 
 These are the things that I use:
