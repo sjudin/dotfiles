@@ -271,3 +271,4 @@ exec_always --no-startup-id "bash ~/.config/sway/tray.sh"
 # wallpaper
 exec_always swaybg -i ~/wallpaper.png
 
+include /etc/sway/config.d/*
