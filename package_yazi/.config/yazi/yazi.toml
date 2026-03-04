@@ -8,5 +8,6 @@ imv_open = [
 
 [open]
 prepend_rules = [
-	{ mime="image/*", use = [ "imv_open", "reveal" ] }
+	{ mime="image/*", use = [ "imv_open", "reveal" ] },
+    { url = "*.html", use = [ "open", "edit" ] }
 ]
