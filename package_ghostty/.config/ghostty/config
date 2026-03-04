@@ -1,6 +1,8 @@
-theme = gruvbox-custom
+# theme = gruvbox-custom
+theme = Gruvbox Material Dark
 
 font-family = JetBrains Mono
+font-family = Symbols Nerd Font Mono
 font-size = 13.0
 
 cursor-style = block
