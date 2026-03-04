@@ -3,6 +3,7 @@
 alias ls='ls --color'
 
 alias vim='nvim'
+alias t="~/scripts/tm-manager.sh"
 
 cd_and_source_venv() {
     cd $1
