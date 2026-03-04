@@ -64,8 +64,8 @@ export VISUAL=nvim;
 export EDITOR=nvim;
 
 # Use clang and clang++ instead of gcc
-export CC=$(realpath `which clang`)
-export CXX=$(realpath `which clang++`)
+export CC=/usr/bin/clang
+export CXX=/usr/bin/clang++
 export LD=/usr/bin/lld
 
 export FZF_DEFAULT_COMMAND='fdfind --type f --strip-cwd-prefix --hidden --follow --exclude .git'
@@ -92,17 +92,40 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 
+# ==========================================
+# FZF Smart Caching
+# ==========================================
+FZF_CACHE="$HOME/.fzf_cache.zsh"
+# Regenerate if cache is missing, or if the fzf binary is newer than the cache
+if [[ ! -f "$FZF_CACHE" ]] || [[ "$(command -v fzf)" -nt "$FZF_CACHE" ]]; then
+    fzf --zsh >| "$FZF_CACHE"
+fi
+source "$FZF_CACHE"
 
-# User configuration
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-# Set up fzf key bindings and fuzzy completion
-source <(fzf --zsh)
+# ==========================================
+# Oh-My-Posh Smart Caching
+# ==========================================
+OMP_CACHE="$HOME/.omp_cache.zsh"
+OMP_CONFIG="$HOME/.config/oh-my-posh/avit.toml"
+# Regenerate if cache is missing, config is updated, or oh-my-posh is updated
+if [[ ! -f "$OMP_CACHE" ]] || [[ "$OMP_CONFIG" -nt "$OMP_CACHE" ]] || [[ "$(command -v oh-my-posh)" -nt "$OMP_CACHE" ]]; then
+    oh-my-posh init zsh --config "$OMP_CONFIG" >| "$OMP_CACHE"
+fi
+source "$OMP_CACHE"
 
 source $HOME/.aliases
 
-eval $(keychain --eval id_ed25519 --quiet)
-
-eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/avit.toml)"
+# Fast keychain loading
+if [[ -S "$SSH_AUTH_SOCK" ]]; then
+    # SSH agent is already running and connected (e.g., inside tmux or VSCode)
+    :
+elif [[ -f "$HOME/.keychain/$HOST-sh" ]]; then
+    # Read the cached environment variables instantly
+    source "$HOME/.keychain/$HOST-sh"
+else
+    # Fallback: only run the slow keychain command if nothing else worked
+    eval $(keychain --eval id_ed25519 --quiet)
+fi
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
@@ -118,21 +141,16 @@ autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
 # Plugins
-zinit snippet OMZP::git
-zinit snippet OMZP::command-not-found
-zinit snippet OMZP::colored-man-pages
-
-zinit light zdharma-continuum/fast-syntax-highlighting
-zinit light zsh-users/zsh-autosuggestions
-zinit light zsh-users/zsh-completions
-zinit light Aloxaf/fzf-tab
-
 zinit wait lucid for \
  atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
     zdharma-continuum/fast-syntax-highlighting \
  blockf \
     zsh-users/zsh-completions \
  atload"!_zsh_autosuggest_start" \
-    zsh-users/zsh-autosuggestions   
+    zsh-users/zsh-autosuggestions   \
+    Aloxaf/fzf-tab \
+    OMZP::git \
+    OMZP::command-not-found \
+    OMZP::colored-man-pages
 
 # zprof
