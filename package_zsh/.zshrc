@@ -30,7 +30,7 @@ export CC=/usr/bin/clang
 export CXX=/usr/bin/clang++
 export LD=/usr/bin/lld
 
-export FZF_DEFAULT_COMMAND='fdfind --type f --strip-cwd-prefix --hidden --follow --exclude .git'
+export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 export LANGUAGE="en_US.UTF-8"
@@ -77,15 +77,17 @@ source "$OMP_CACHE"
 
 source $HOME/.aliases
 
-# Fast keychain loading
-if [[ -S "$SSH_AUTH_SOCK" ]]; then
-    # SSH agent is already running and connected (e.g., inside tmux or VSCode)
-    :
-elif [[ -f "$HOME/.keychain/$HOST-sh" ]]; then
-    # Read the cached environment variables instantly
+# ==========================================
+# Fast & Reliable Keychain Loading
+# ==========================================
+# Load the cached environment variables if they exist
+if [[ -f "$HOME/.keychain/$HOST-sh" ]]; then
     source "$HOME/.keychain/$HOST-sh"
-else
-    # Fallback: only run the slow keychain command if nothing else worked
+fi
+
+# Check if the ssh-agent is actually reachable AND has your key loaded
+if ! ssh-add -l >/dev/null 2>&1; then
+    # If the agent is dead or empty (e.g., after a reboot), run keychain
     eval $(keychain --eval id_ed25519 --quiet)
 fi
 
