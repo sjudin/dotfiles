@@ -250,7 +250,8 @@ exec hypridle
 exec swaync
 
 # polkit agent
-exec systemctl --user status hyprpolkitagent.service
+exec systemctl --user start hyprpolkitagent.service
+
 
 # Floating windows
 for_window [instance="gimp"] floating enable
