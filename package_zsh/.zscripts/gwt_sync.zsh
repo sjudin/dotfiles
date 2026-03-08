@@ -16,6 +16,14 @@ gwt-sync() {
     local branch=$2
     local base_branch=$3
 
+    # If the provided path is an existing directory (like ../), 
+    # automatically append the branch name to create the folder inside it.
+    if [ -d "$target_path" ]; then
+      # The %/ strips any trailing slashes the user might have typed 
+      # so we don't end up with weird paths like ..///my-branch
+      target_path="${target_path%/}/$branch"
+    fi
+
     if [ -e "$target_path" ]; then
       echo "❌ Error: '$target_path' already exists. Aborting to prevent overwriting."
       return 1
