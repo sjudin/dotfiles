@@ -72,10 +72,27 @@ delete_tmux_session() {
         return 0
     fi
 
-    # Read each selected line and kill the corresponding session
-    echo "$sessions" | while read -r session; do
-        tmux kill-session -t "$session"
-    done
+    # Identify the session we are currently inside
+    local current_session=$(tmux display-message -p '#S' 2>/dev/null)
+    local kill_current=false
+
+    # Use a here-string (<<<) instead of a pipe (|) so we don't spawn a subshell.
+    # This allows our 'kill_current' variable to survive after the loop finishes.
+    while read -r session; do
+        if [ -z "$session" ]; then continue; fi
+
+        if [ "$session" = "$current_session" ]; then
+            # Flag it, but don't kill it yet!
+            kill_current=true
+        else
+            tmux kill-session -t "$session"
+        fi
+    done <<< "$sessions"
+
+    # Commit the final kill if it was flagged
+    if [ "$kill_current" = true ]; then
+        tmux kill-session -t "$current_session"
+    fi
 }
 
 # if in tmux, we list the current sessions and also give a "New session"/"Delete session"
