@@ -11,6 +11,9 @@ new_tmux_session() {
         return 0
     fi
 
+    # Strip the trailing slash
+    full_path="${full_path%/}"
+
     local hashed_path=$(echo "$full_path" | md5sum | head -c 4)
     local base_dir=$(basename "$full_path")
     local session_name="${base_dir}-${hashed_path}"

@@ -64,4 +64,39 @@ gwt-sync() {
 
     git -C "${target_path}" status > /dev/null 2>&1
     echo "✅ Successfully created and synced."
+
+    # ==========================================
+    # TMUX INTEGRATION
+    # ==========================================
+    echo "" # Add a blank line for readability
+
+    # read -q waits for a single keystroke (y/n) without requiring the Enter key!
+    if read -q "choice?🖥️  Create and switch to a Tmux session for this worktree? (y/N) "; then
+        echo "" # Newline after the prompt
+
+        # Use 'pwd -P' to guarantee the absolute, physical path (bypassing symlinks)
+        local full_path=$(cd "$target_path" && pwd -P)
+
+        local hashed_path=$(echo "$full_path" | md5sum | head -c 4)
+        local base_dir=$(basename "$full_path")
+        local session_name="${base_dir}-${hashed_path}"
+
+        # If tmux server isn't running at all, start it and attach
+        if ! tmux ls > /dev/null 2>&1; then
+            tmux new-session -c "$full_path" -As "$session_name"
+            return 0
+        # If server is running but session doesn't exist, create it in the background
+        elif ! tmux has-session -t "$session_name" 2> /dev/null; then
+            tmux new-session -c "$full_path" -Ads "$session_name"
+        fi
+
+        # Safely switch or attach depending on whether we are currently inside tmux
+        if [[ -n "$TMUX" ]]; then
+            tmux switch-client -t "$session_name"
+        else
+            tmux attach-session -t "$session_name"
+        fi
+    else
+        echo "" # Clean newline if they say no
+    fi
 }
