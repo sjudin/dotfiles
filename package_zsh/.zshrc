@@ -75,8 +75,10 @@ if [[ ! -f "$OMP_CACHE" ]] || [[ "$OMP_CONFIG" -nt "$OMP_CACHE" ]] || [[ "$(comm
 fi
 source "$OMP_CACHE"
 
+fpath=(~/.zfunc $fpath)
+
 source $HOME/.aliases
-source $HOME/scripts/gwt_sync.zsh
+source $HOME/.zscripts/gwt_sync.zsh
 
 # ==========================================
 # Fast & Reliable Keychain Loading
@@ -107,14 +109,13 @@ autoload -Uz _zinit
 
 # Plugins
 zinit wait lucid for \
+ atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
  blockf \
     zsh-users/zsh-completions \
     Aloxaf/fzf-tab \
- atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
     zdharma-continuum/fast-syntax-highlighting \
  atload"!_zsh_autosuggest_start" \
     zsh-users/zsh-autosuggestions \
- atload"compdef _gwt_sync gwt-sync" \
     OMZP::git \
     OMZP::command-not-found \
     OMZP::colored-man-pages

@@ -1,21 +1,3 @@
-_gwt_sync() {
-  local context state state_descr line
-  typeset -A opt_args
-
-  _arguments -C \
-    '1:target directory:_dirs' \
-    '2:git branch:->branches'
-
-  if [[ "$state" == branches ]]; then
-    # Store branches in a proper array first
-    local -a my_branches
-    my_branches=(${(f)"$(git branch --all --format='%(refname:short)' 2>/dev/null | grep -v 'HEAD')"})
-    
-    # _wanted tells fzf-tab: "Here is a list of 'branches', please render them under the header 'git branch'"
-    _wanted branches expl 'git branch' compadd -a my_branches
-  fi
-}
-
 gwt-sync() {
     if [ -z "$2" ]; then
       echo "Usage: gwt-sync <path> <branch>"

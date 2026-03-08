@@ -1,0 +1,18 @@
+#compdef gwt-sync
+
+_gwt_sync_completion() {
+  local context state state_descr line
+  typeset -A opt_args
+
+  _arguments -C \
+    '1:target directory:_dirs' \
+    '2:git branch:->branches'
+
+  if [[ "$state" == branches ]]; then
+    local -a my_branches
+    my_branches=(${(f)"$(git branch --all --format='%(refname:short)' 2>/dev/null | grep -v 'HEAD')"})
+    _wanted branches expl 'git branch' compadd -a my_branches
+  fi
+}
+
+_gwt_sync_completion "$@"
