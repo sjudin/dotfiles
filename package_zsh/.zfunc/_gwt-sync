@@ -1,14 +1,23 @@
 #compdef gwt-sync
 
 _gwt_sync_completion() {
-  local context state state_descr line
-  typeset -A opt_args
+  local has_b=0
+  
+  # Check if the user typed -b as the first argument
+  [[ "${words[2]}" == "-b" ]] && has_b=1
 
-  _arguments -C \
-    '1:target directory:_dirs' \
-    '2:git branch:->branches'
-
-  if [[ "$state" == branches ]]; then
+  if (( CURRENT == 2 )); then
+    # At position 1, offer both the -b flag AND directory completion
+    local -a opts=(-b)
+    _describe 'options' opts
+    _path_files -/
+    
+  elif (( CURRENT == 2 + has_b )); then
+    # Path argument (shifted by 1 if -b is present)
+    _path_files -/
+    
+  elif (( CURRENT == 3 + has_b || CURRENT == 4 + has_b )); then
+    # Branch and Base Branch arguments (shifted by 1 if -b is present)
     local -a my_branches
     my_branches=(${(f)"$(git branch --all --format='%(refname:short)' 2>/dev/null | grep -v 'HEAD')"})
     _wanted branches expl 'git branch' compadd -a my_branches
