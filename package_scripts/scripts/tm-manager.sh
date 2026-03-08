@@ -23,7 +23,6 @@ new_tmux_session() {
     if ! tmux run 2> /dev/null; then
         tmux new-session -c "$full_path" -As "$session_name"
         return 0
-
     # If the session does not exist, we create it
     elif ! tmux has-session -t "$session_name" 2> /dev/null; then
         tmux new-session -c "$full_path" -Ads "$session_name"
@@ -38,13 +37,30 @@ new_tmux_session() {
     fi
 }
 
-# if in tmux, we list the current sessions and also give a "New session"
-# option which can be used to create and switch to a new session
+delete_tmux_session() {
+    # The --multi flag enables TAB to select multiple items. 
+    # Added a --header so you don't forget the hotkeys!
+    local sessions=$(tmux list-sessions -F '#{session_name}' 2>/dev/null | \
+        _fzf_ui --multi --prompt="🗑️ Delete > " --header="TAB: select | ENTER: delete | ESC: cancel")
+    if [ -z "$sessions" ]; then
+        return 0
+    fi
+
+    # Read each selected line and kill the corresponding session
+    echo "$sessions" | while read -r session; do
+        tmux kill-session -t "$session"
+    done
+}
+
+# if in tmux, we list the current sessions and also give a "New session"/"Delete session"
+# options which can be used to create and switch to a new session or delete sessions
 if [ $TERM_PROGRAM = tmux ]; then
-    tmux_session=$((tmux list-sessions -F '#{session_name}'; echo "New session") | _fzf_ui --prompt="🖥️ Session > ")
+    tmux_session=$((tmux list-sessions -F '#{session_name}'; echo "New session"; echo "Delete session") | _fzf_ui --prompt="🖥️ Session > ")
 
     if [ "$tmux_session" = "New session" ]; then
         new_tmux_session "$1"
+    elif [ "$tmux_session" = "Delete session" ]; then
+        delete_tmux_session
     elif [ -n "$tmux_session" ]; then
         tmux switch -t "$tmux_session"
     fi
