@@ -36,6 +36,7 @@ These are the things that I use:
   - [wayland-pipewire-idle-inhibit](https://github.com/rafaelrc7/wayland-pipewire-idle-inhibit)
   - [arch-update](https://github.com/Antiz96/arch-update)
   - [fastfetch](https://github.com/fastfetch-cli/fastfetch)
+  - [rofi](https://github.com/davatorium/rofi)
 - [yazi](https://yazi-rs.github.io/)
   - [imv](https://git.sr.ht/~exec64/imv/)
 - [fzf](https://github.com/junegunn/fzf)
