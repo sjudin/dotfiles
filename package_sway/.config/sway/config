@@ -229,6 +229,8 @@ exec swaync
 # polkit agent
 exec systemctl --user start hyprpolkitagent.service
 
+exec wl-paste --type text --watch cliphist store
+exec wl-paste --type image --watch cliphist store
 
 # Floating windows
 for_window [instance="gimp"] floating enable

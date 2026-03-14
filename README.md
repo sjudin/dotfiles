@@ -37,6 +37,7 @@ These are the things that I use:
   - [arch-update](https://github.com/Antiz96/arch-update)
   - [fastfetch](https://github.com/fastfetch-cli/fastfetch)
   - [rofi](https://github.com/davatorium/rofi)
+    - [cliphist](https://github.com/sentriz/cliphist)
 - [yazi](https://yazi-rs.github.io/)
   - [imv](https://git.sr.ht/~exec64/imv/)
 - [fzf](https://github.com/junegunn/fzf)

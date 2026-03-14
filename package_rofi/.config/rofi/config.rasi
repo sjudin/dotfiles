@@ -158,19 +158,27 @@ configuration {
 /*	me-accept-entry: "MouseDPrimary";*/
 /*	me-accept-custom: "Control+MouseDPrimary";*/
   timeout {
-      action: "kb-cancel";
-      delay:  0;
+    action: "kb-cancel";
+    delay:  0;
   }
   filebrowser {
-      directories-first: true;
-      sorting-method:    "name";
+    directories-first: true;
+    sorting-method:    "name";
   }
-  display-ssh:    "";
-  display-run:    "";
-  display-drun:   "";
-  display-window: "";
-  display-combi:  "";
+  Clipboard {
+    display-name: " ";
+  }
+  Audio {
+    display-name: "󰓃";
+  }
+  display-ssh:    " ";
+  display-run:    " ";
+  display-drun:   " ";
+  display-window: " ";
+  display-combi:  " ";
   show-icons:     true;
+
+  modi: "drun,Audio:~/.config/rofi/scripts/rofi_sound_select.sh,Clipboard:~/.config/rofi/scripts/rofi_clipboard.sh";
 }
 
 @theme "~/.config/rofi/gruvbox-material.rasi"
