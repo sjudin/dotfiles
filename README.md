@@ -18,6 +18,7 @@ this will symlink all the config files.
 Fonts:
 - [JetBrains Mono Nerd Font](https://archlinux.org/packages/extra/any/ttf-jetbrains-mono-nerd/)
 - [Noto](https://fonts.google.com/noto)
+  - [Noto Color Emoji](https://fonts.google.com/noto/specimen/Noto+Color+Emoji)
 
 These are the things that I use:
 - [zsh](https://www.zsh.org/)
