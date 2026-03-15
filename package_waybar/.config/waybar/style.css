@@ -173,8 +173,11 @@ label:focus {
 }
 
 #pulseaudio.muted {
-    background-color: #fbf1c7;
-    color: #af3a03;
+    background-color: #fe8019;
+    color: #282828;
+    padding: 0 10px;
+    border-radius: 6px;
+    margin: 2px 4px;
 }
 
 #tray {
