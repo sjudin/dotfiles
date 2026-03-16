@@ -78,14 +78,14 @@
         "format-icons": [" ", " ", " ", " ", " "]
     },
     "power-profiles-daemon": {
-        "format": " {icon}",
+        "format": "{icon}",
         "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
         "tooltip": true,
         "format-icons": {
           "default": "",
           "performance": "",
           "balanced": "",
-          "power-saver": " "
+          "power-saver": ""
         }
     },
     "network": {

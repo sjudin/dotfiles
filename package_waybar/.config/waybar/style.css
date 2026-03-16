@@ -39,12 +39,11 @@ window#waybar.hidden {
 
 #workspaces button.focused {
     background-color: #504945;
-    border: 2px solid #928374;
+    border: 1px solid #928374;
     padding: 0 20px 0 15px;
 }
 
 #workspaces button.urgent {
-    /* background-color: #fbf1c7; */
     background-color: #f53c3c;
     color: #3c3836;
 }
@@ -180,42 +179,58 @@ tooltip label {
     color: #3c3836;
 }
 
-/* Shared settings for the grouped modules */
-#cpu, #memory, #temperature, #custom-disk {
-    margin: 0;
-    padding: 0 12px;
-    color: #282828; 
 
+#memory, #cpu, #temperature, #custom-disk,
+#backlight, #battery, #power-profiles-daemon {
+    /* Use a unified dark background (Gruvbox bg1) */
+    background-color: #3c3836; 
+    margin: 0; 
+    padding: 0 10px;
+    /* font-weight: bold; */
     border-radius: 0; 
-    border: 2px solid transparent; 
 }
 
-/* Left Piece */
+/* ---------------------------------------------------------
+   Group 1: Hardware (Left to Right)
+   --------------------------------------------------------- */
 #memory {
-    background-color: #b8bb26; /* Gruvbox Light Blue */
-    border-radius: 8px 0 0 8px;
-    margin-left: 2px;
+    color: #b8bb26; /* Green Text */
+    border-radius: 8px 0 0 8px; /* Round Left */
+    margin-left: 4px; /* Space from previous module */
 }
 
-/* Middle Piece */
 #cpu {
-    background-color: #d3869b; /* Gruvbox Light Purple */
+    color: #d3869b; /* Purple Text */
 }
 
-/* Middle Piece */
 #temperature {
-    background-color: #fabd2f;
+    color: #fabd2f; /* Yellow Text */
 }
 
-#temperature.critical {
-    background-color: #fbf1c7;
-    color: #b57614;
-}
-
-/* Right Piece */
 #custom-disk {
-    background-color: #458588;
-    color: #ebdbb2;
-    border-radius: 0 8px 8px 0;
-    margin-right: 2px;
+    color: #83a598; /* Blue Text */
+    border-radius: 0 8px 8px 0; /* Round Right */
+    margin-right: 4px; /* Space before next group */
+}
+
+/* ---------------------------------------------------------
+   Group 2: Power (Left to Right)
+   --------------------------------------------------------- */
+#backlight {
+    color: #8ec07c; /* Aqua Text */
+    border-radius: 8px 0 0 8px; /* Round Left */
+}
+
+#battery {
+    color: #ebdbb2; /* Standard Light Text */
+}
+
+#battery.critical:not(.charging) {
+    color: #fb4934; /* Red Text for critical */
+}
+
+#power-profiles-daemon {
+    color: #fe8019; /* Orange Text */
+    border-radius: 0 8px 8px 0; /* Round Right */
+    padding: 0 16px 0 2px;
 }
