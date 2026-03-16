@@ -173,7 +173,7 @@ tooltip label {
    --------------------------------------------------------- */
 #custom-idle-inhibit {
     color: #928374;
-    padding-right: 6px;
+    padding-right: 4px;
     border-radius: 8px 0 0 8px;
     margin-left: 4px;
 }
@@ -183,6 +183,7 @@ tooltip label {
 }
 
 #tray {
+    padding: 0 0 0 10px;
 }
 
 #tray > .needs-attention {
@@ -233,4 +234,11 @@ tooltip label {
     color: #fe8019; /* Orange Text */
     border-radius: 0 8px 8px 0; /* Round Right */
     padding: 0 16px 0 6px;
+}
+
+#custom-spacer {
+    background-color: #3c3836; 
+    padding: 0;
+    margin: 0;
+    min-width: 10px;
 }
