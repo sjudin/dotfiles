@@ -11,8 +11,6 @@ window#waybar.eDP-1 * {
 }
 
 window#waybar {
-    /* background-color: rgba(43, 48, 59, 0.5); */
-    /* border-bottom: 3px solid rgba(100, 114, 125, 0.5); */
     color: #a89984;
     background-color: #282828;
 }
@@ -21,17 +19,8 @@ window#waybar.hidden {
     opacity: 0.2;
 }
 
-/*
-window#waybar.empty {
-    background-color: transparent;
-}
-window#waybar.solo {
-    background-color: #FFFFFF;
-}
-*/
-
 #workspaces button {
-    margin: 2px 2px; 
+    margin: 0 2px; 
     padding: 0 12px;
     background-color: #282828;
     color: #ebdbb2;
@@ -42,6 +31,7 @@ window#waybar.solo {
 }
 
 #workspaces button:hover {
+    color: #282828;
     background-color: #665c54;
     border: 2px solid #928374;
     box-shadow: none;
@@ -67,19 +57,15 @@ window#waybar.solo {
 #clock,
 #cpu,
 #memory,
-#disk,
+#custom-disk,
 #temperature,
 #backlight,
 #network,
 #pulseaudio,
-#custom-media,
 #tray,
 #mode,
 #idle_inhibitor,
-#custom-poweroff,
-#custom-suspend,
-#power-profiles-daemon
-#mpd {
+#power-profiles-daemon {
     padding: 0 8px;
     background-color: #282828;
     color: #ebdbb2;
@@ -153,19 +139,6 @@ tooltip label {
     color: #458588;
 }
 
-#temperature {
-    color: #fabd2f;
-}
-
-#temperature.critical {
-    background-color: #fbf1c7;
-    color: #b57614;
-}
-
-#memory {
-    color: #b8bb26;
-}
-
 #network {
     color: #fb4934;
 }
@@ -179,7 +152,7 @@ tooltip label {
 
 #pulseaudio {
     color: #fe8019;
-    margin: 4px 2px;
+    margin: 0 2px;
     border-radius: 8px;
     border: 2px solid transparent;
 }
@@ -207,57 +180,42 @@ tooltip label {
     color: #3c3836;
 }
 
-#custom-media {
-    background-color: #66cc99;
-    color: #2a5c45;
-    min-width: 100px;
+/* Shared settings for the grouped modules */
+#cpu, #memory, #temperature, #custom-disk {
+    margin: 0;
+    padding: 0 12px;
+    color: #282828; 
+
+    border-radius: 0; 
+    border: 2px solid transparent; 
 }
 
-#custom-media.custom-spotify {
-    background-color: #66cc99;
+/* Left Piece */
+#memory {
+    background-color: #b8bb26; /* Gruvbox Light Blue */
+    border-radius: 8px 0 0 8px;
+    margin-left: 2px;
 }
 
-#custom-media.custom-vlc {
-    background-color: #ffa000;
+/* Middle Piece */
+#cpu {
+    background-color: #d3869b; /* Gruvbox Light Purple */
 }
 
-#mpd {
-    background-color: #66cc99;
-    color: #2a5c45;
+/* Middle Piece */
+#temperature {
+    background-color: #fabd2f;
 }
 
-#mpd.disconnected {
-    background-color: #f53c3c;
+#temperature.critical {
+    background-color: #fbf1c7;
+    color: #b57614;
 }
 
-#mpd.stopped {
-    background-color: #90b1b1;
-}
-
-#mpd.paused {
-    background-color: #51a37a;
-}
-
-#language {
-    background: #00b093;
-    color: #740864;
-    padding: 0 5px;
-    margin: 0 5px;
-    min-width: 16px;
-}
-
-#keyboard-state {
-    background: #97e1ad;
-    color: #000000;
-    padding: 0 0px;
-    margin: 0 5px;
-    min-width: 16px;
-}
-
-#keyboard-state > label {
-    padding: 0 5px;
-}
-
-#keyboard-state > label.locked {
-    background: rgba(0, 0, 0, 0.2);
+/* Right Piece */
+#custom-disk {
+    background-color: #458588;
+    color: #ebdbb2;
+    border-radius: 0 8px 8px 0;
+    margin-right: 2px;
 }
