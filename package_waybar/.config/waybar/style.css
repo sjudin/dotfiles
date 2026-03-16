@@ -24,7 +24,7 @@ window#waybar.hidden {
     padding: 0 12px;
     background-color: #282828;
     color: #ebdbb2;
-    border: 2px solid transparent; 
+    border: 1px solid transparent; 
     border-radius: 8px; 
     box-shadow: none; 
     transition: all 0.02s ease; 
@@ -33,7 +33,7 @@ window#waybar.hidden {
 #workspaces button:hover {
     color: #282828;
     background-color: #665c54;
-    border: 2px solid #928374;
+    border: 1px solid #928374;
     box-shadow: none;
 }
 
@@ -63,8 +63,8 @@ window#waybar.hidden {
 #pulseaudio,
 #tray,
 #mode,
-#idle_inhibitor,
-#power-profiles-daemon {
+#power-profiles-daemon
+#custom-idle-inhibit {
     padding: 0 8px;
     background-color: #282828;
     color: #ebdbb2;
@@ -95,10 +95,6 @@ window#waybar.hidden {
 
 #power-profiles-daemon {
     padding-left: 3px;
-    color: #d3869b;
-}
-
-#battery.charging, #battery.plugged {
     color: #d3869b;
 }
 
@@ -146,7 +142,7 @@ tooltip label {
     background-color: #fb4934;
     color: #282828;
     border-radius: 8px;
-    margin: 4px 2px;
+    margin: 0px 2px;
 }
 
 #pulseaudio {
@@ -161,6 +157,31 @@ tooltip label {
     color: #282828; 
 }
 
+
+
+#memory, #cpu, #temperature, #custom-disk,
+#backlight, #battery, #power-profiles-daemon, #tray, #custom-idle-inhibit {
+    /* Use a unified dark background (Gruvbox bg1) */
+    background-color: #3c3836; 
+    margin: 0; 
+    padding: 0 10px;
+    border-radius: 0; 
+}
+
+/* ---------------------------------------------------------
+   Tray (Left to Right)
+   --------------------------------------------------------- */
+#custom-idle-inhibit {
+    color: #928374;
+    padding-right: 6px;
+    border-radius: 8px 0 0 8px;
+    margin-left: 4px;
+}
+
+#custom-idle-inhibit.manual {
+    color: #f2594b;
+}
+
 #tray {
 }
 
@@ -169,29 +190,8 @@ tooltip label {
     color: #3c3836;
 }
 
-#idle_inhibitor {
-    background-color: #282828;
-    color: #ebdbb2;
-}
-
-#idle_inhibitor.activated {
-    background-color: #fbf1c7;
-    color: #3c3836;
-}
-
-
-#memory, #cpu, #temperature, #custom-disk,
-#backlight, #battery, #power-profiles-daemon {
-    /* Use a unified dark background (Gruvbox bg1) */
-    background-color: #3c3836; 
-    margin: 0; 
-    padding: 0 10px;
-    /* font-weight: bold; */
-    border-radius: 0; 
-}
-
 /* ---------------------------------------------------------
-   Group 1: Hardware (Left to Right)
+   Hardware (Left to Right)
    --------------------------------------------------------- */
 #memory {
     color: #b8bb26; /* Green Text */
@@ -214,7 +214,7 @@ tooltip label {
 }
 
 /* ---------------------------------------------------------
-   Group 2: Power (Left to Right)
+   Power (Left to Right)
    --------------------------------------------------------- */
 #backlight {
     color: #8ec07c; /* Aqua Text */
@@ -232,5 +232,5 @@ tooltip label {
 #power-profiles-daemon {
     color: #fe8019; /* Orange Text */
     border-radius: 0 8px 8px 0; /* Round Right */
-    padding: 0 16px 0 2px;
+    padding: 0 16px 0 6px;
 }

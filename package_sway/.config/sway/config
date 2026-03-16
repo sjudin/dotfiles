@@ -229,6 +229,9 @@ exec swaync
 # polkit agent
 exec systemctl --user start hyprpolkitagent.service
 
+# Enables inhibit_idle when playing audio
+exec ~/.local/bin/wayland-pipewire-idle-inhibit
+
 exec wl-paste --type text --watch cliphist store
 exec wl-paste --type image --watch cliphist store
 

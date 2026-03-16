@@ -4,8 +4,8 @@
     "spacing": 0, // Gaps between modules (4px)
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode"],
-    "modules-center": ["idle_inhibitor"],
-    "modules-right": ["pulseaudio", "network", "memory", "cpu", "temperature#cpu", "custom/disk", "backlight", "battery", "power-profiles-daemon", "clock", "tray"],
+    "modules-center": ["clock"],
+    "modules-right": ["pulseaudio", "network", "memory", "cpu", "temperature#cpu", "custom/disk", "backlight", "battery", "power-profiles-daemon", "custom/idle-inhibit", "tray"],
     // Modules configuration
     "sway/workspaces": {
         "format": "{name}: {icon}",
@@ -74,8 +74,9 @@
         },
         "format": "{capacity}% {icon}",
         "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
         "format-alt": "{time} {icon}",
-        "format-icons": [" ", " ", " ", " ", " "]
+        "format-icons": ["", "", "", "", ""]
     },
     "power-profiles-daemon": {
         "format": "{icon}",
@@ -116,4 +117,15 @@
         },
         "on-click": "pavucontrol"
     },
+    "custom/idle-inhibit": {
+        "return-type": "json",
+        "format": "{icon}",
+        "exec": "~/.config/waybar/scripts/idle_inhibit_dbus_monitor.sh",
+        "format-icons": {
+            "inhibited": "󰈈",
+            "idle": "󰈉",
+            "off": ""
+        },
+        "on-click": "busctl --user call com.rafaelrc.WaylandPipewireIdleInhibit /com/rafaelrc/WaylandPipewireIdleInhibit com.rafaelrc.WaylandPipewireIdleInhibit ToggleManualInhibit"
+    }
 }
