@@ -36,23 +36,6 @@
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
-    "custom/poweroff": {
-        "format": "",
-        "tooltip-format": "shutdown",
-        "on-click": "swaymsg exec systemctl poweroff",
-    },
-    "custom/suspend": {
-        "format": "",
-        "tooltip-format": "suspend",
-        "on-click": "sh -c '(sleep 0.5s; systemctl suspend) & disown'",
-    },
-    "idle_inhibitor": {
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "",
-            "deactivated": ""
-        }
-    },
     "tray": {
         // "icon-size": 21,
         "spacing": 10
@@ -63,22 +46,22 @@
         "interval": 1
     },
     "cpu": {
-        "format": "{usage}% ",
+        "format": " {usage}%",
         "tooltip": false
     },
     "memory": {
-        "format": "{}% "
+        "format": " {}%"
     },
     "disk": {
         "interval": 30,
-        "format": "{free}/{total}",
+        "format": "{used}/{total}"
     },
     "temperature#cpu": {
         // "thermal-zone": 2,
         "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
         "critical-threshold": 70,
         // "format-critical": "{temperatureC}°C {icon}",
-        "format": " {temperatureC}°C {icon}",
+        "format": " {temperatureC}°C {icon}"
     },
     "backlight": {
         // "device": "acpi_video1",
@@ -110,18 +93,18 @@
         }
     },
     "network": {
-        // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": "{ipaddr}/{cidr} ",
+        "interface": "enp0*", // (Optional) To force the use of this interface
+        "format-ethernet": "{ipaddr}/{cidr} ",
         "tooltip-format": "{ifname} via {gwaddr} ",
         "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "Disconnected ⚠",
+        "format-disconnected": "", // Hide when disconnected
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
         "format": "{volume}% {icon} {format_source}",
         "format-bluetooth": "{volume}% {icon} {format_source}",
+        "min-length": 13,
         "format-bluetooth-muted": "󰖁 {icon} {format_source}",
         "format-muted": "󰖁 {format_source}",
         "format-source": "{volume}% ",

@@ -11,12 +11,10 @@ window#waybar.eDP-1 * {
 }
 
 window#waybar {
-/*    background-color: rgba(43, 48, 59, 0.5);
-    border-bottom: 3px solid rgba(100, 114, 125, 0.5);*/
+    /* background-color: rgba(43, 48, 59, 0.5); */
+    /* border-bottom: 3px solid rgba(100, 114, 125, 0.5); */
     color: #a89984;
     background-color: #282828;
-/*    transition-property: background-color;
-    transition-duration: .5s;*/
 }
 
 window#waybar.hidden {
@@ -33,29 +31,26 @@ window#waybar.solo {
 */
 
 #workspaces button {
-    padding: 0 10px;
+    margin: 2px 2px; 
+    padding: 0 12px;
     background-color: #282828;
     color: #ebdbb2;
-    /* Use box-shadow instead of border so the text isn't offset */
-    box-shadow: inset 0 -3px transparent;
-    /* Avoid rounded borders under each workspace name */
-    border: none;
-    border-radius: 0;
+    border: 2px solid transparent; 
+    border-radius: 8px; 
+    box-shadow: none; 
+    transition: all 0.02s ease; 
 }
 
-/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 #workspaces button:hover {
-    background: rgba(0, 0, 0, 0.2);
-/*    box-shadow: inset 0 -3px #fbf1c7;
-*/
-    background-color: #3c3836;
+    background-color: #665c54;
+    border: 2px solid #928374;
+    box-shadow: none;
 }
 
 #workspaces button.focused {
-/*    box-shadow: inset 0 -3px #fbf1c7;
-*/
-    background-color: #3c3836;
-    color: #ebdbb2;
+    background-color: #504945;
+    border: 2px solid #928374;
+    padding: 0 20px 0 15px;
 }
 
 #workspaces button.urgent {
@@ -85,14 +80,14 @@ window#waybar.solo {
 #custom-suspend,
 #power-profiles-daemon
 #mpd {
-    padding: 0 10px;
+    padding: 0 8px;
     background-color: #282828;
     color: #ebdbb2;
 }
 
 #window,
 #workspaces {
-    margin: 0 4px;
+    margin: 0 2px;
 }
 
 /* If workspaces is the leftmost module, omit left margin */
@@ -143,6 +138,17 @@ label:focus {
     background-color: #000000;
 }
 
+tooltip {
+    background-color: #282828;
+    border: 2px solid #504945;
+    border-radius: 8px;
+}
+
+tooltip label {
+    color: #ebdbb2;
+    padding: 4px;
+}
+
 #backlight {
     color: #458588;
 }
@@ -165,24 +171,22 @@ label:focus {
 }
 
 #network.disconnected {
-    background-color: #fbf1c7;
-    color: #9d0006;
+    background-color: #fb4934;
+    color: #282828;
+    border-radius: 8px;
+    margin: 4px 2px;
 }
-
-/*#disk {
-    background-color: #964B00;
-}*/
 
 #pulseaudio {
     color: #fe8019;
+    margin: 4px 2px;
+    border-radius: 8px;
+    border: 2px solid transparent;
 }
 
 #pulseaudio.muted {
     background-color: #fe8019;
-    color: #282828;
-    padding: 0 10px;
-    border-radius: 6px;
-    margin: 2px 4px;
+    color: #282828; 
 }
 
 #tray {
