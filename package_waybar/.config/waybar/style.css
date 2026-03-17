@@ -6,12 +6,11 @@
 }
 
 /* Smaller font for a laptop screen */
-window#waybar.eDP-1 * {
+window.eDP-1 * {
     font-size: 14px;
 }
 
 window#waybar {
-    color: #a89984;
     background-color: #282828;
 }
 
@@ -21,36 +20,36 @@ window#waybar.hidden {
 
 #workspaces button {
     margin: 0 2px; 
-    padding: 0 12px;
+    padding: 0 16px 0 12px;
     background-color: #282828;
     color: #ebdbb2;
-    border: 1px solid transparent; 
     border-radius: 8px; 
-    box-shadow: none; 
-    transition: all 0.02s ease; 
-}
 
-#workspaces button:hover {
-    color: #282828;
-    background-color: #665c54;
-    border: 1px solid #928374;
-    box-shadow: none;
+    /* Disable implicit CSS on workspace buttons */
+    /* https://github.com/Alexays/Waybar/issues/60#issuecomment-3558719927 */
+    background: none;
+    border: none;
+    text-shadow: none;
+    box-shadow: none; 
+    transition: none;
+    -gtk-icon-shadow: none;
+    -gtk-icon-effect: none;
 }
 
 #workspaces button.focused {
     background-color: #504945;
-    border: 1px solid #928374;
-    padding: 0 20px 0 15px;
+}
+
+#workspaces button:hover {
+    background-color: #7c6f64;
 }
 
 #workspaces button.urgent {
-    background-color: #f53c3c;
-    color: #3c3836;
+    background-color: #cc241d;
 }
 
 #mode {
-    background-color: #64727D;
-    border-bottom: 3px solid #fbf1c7;
+    border-bottom: 3px solid #ebdbb2;
 }
 
 #clock,
@@ -89,25 +88,13 @@ window#waybar.hidden {
     color: #8ec07c;
 }
 
-#battery {
-    color: #d3869b;
-}
-
-#power-profiles-daemon {
-    padding-left: 3px;
-    color: #d3869b;
-}
-
 @keyframes blink {
     to {
-        background-color: #fbf1c7;
-        color: #df3f71;
+        color: #fb4934;
     }
 }
 
 #battery.critical:not(.charging) {
-    background-color: #282828;
-    color: #d3869b;
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: linear;
@@ -149,7 +136,6 @@ tooltip label {
     color: #fe8019;
     margin: 0 2px;
     border-radius: 8px;
-    border: 2px solid transparent;
 }
 
 #pulseaudio.muted {
@@ -161,7 +147,6 @@ tooltip label {
 
 #memory, #cpu, #temperature, #custom-disk,
 #backlight, #battery, #power-profiles-daemon, #tray, #custom-idle-inhibit {
-    /* Use a unified dark background (Gruvbox bg1) */
     background-color: #3c3836; 
     margin: 0; 
     padding: 0 10px;
@@ -173,7 +158,7 @@ tooltip label {
    --------------------------------------------------------- */
 #custom-idle-inhibit {
     color: #928374;
-    padding-right: 4px;
+    padding-right: 5px;
     border-radius: 8px 0 0 8px;
     margin-left: 4px;
 }
@@ -208,6 +193,10 @@ tooltip label {
     color: #fabd2f; /* Yellow Text */
 }
 
+#temperature.critical {
+    color: #f2594b;
+}
+
 #custom-disk {
     color: #83a598; /* Blue Text */
     border-radius: 0 8px 8px 0; /* Round Right */
@@ -224,10 +213,6 @@ tooltip label {
 
 #battery {
     color: #ebdbb2; /* Standard Light Text */
-}
-
-#battery.critical:not(.charging) {
-    color: #fb4934; /* Red Text for critical */
 }
 
 #power-profiles-daemon {

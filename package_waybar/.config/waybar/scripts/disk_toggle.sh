@@ -19,11 +19,17 @@ if [ "$1" == "toggle" ]; then
     exit 0
 fi
 
-# Fetch the usage based on the current state and format for Waybar
 if [ "$STATE" == "root" ]; then
-    USAGE=$(df -h / | awk 'NR==2 {print $5}')
-    echo "{\"text\": \"$USAGE 󰋊\", \"tooltip\": \"Root (/) Usage: $USAGE\"}"
+    TARGET_PATH="/"
+    ALT="root"
 else
-    USAGE=$(df -h $HOME | awk 'NR==2 {print $5}')
-    echo "{\"text\": \"$USAGE 󰋊\", \"tooltip\": \"Home ($HOME) Usage: $USAGE\"}"
+    TARGET_PATH="$HOME"
+    ALT="home"
 fi
+
+# Fetch the raw percentage number (stripping the % sign for the JSON spec)
+PERCENT_NUM=$(df -h "$TARGET_PATH" | awk 'NR==2 {print $5}' | tr -d '%')
+
+# Use printf to safely construct and output the single JSON object
+printf '{"text": %d, "alt": "%s"}\n' "$PERCENT_NUM" "$ALT"
+

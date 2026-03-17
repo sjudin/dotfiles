@@ -16,7 +16,7 @@
             "9": "",
             "10": "",
             "urgent": "",
-            "focused": "",
+            // "focused": "",
             "default": ""
         }
     },
@@ -47,7 +47,7 @@
     },
     "cpu": {
         "format": " {usage}%",
-        "tooltip": false
+        "tooltip": true
     },
     "memory": {
         "format": " {}%"
@@ -57,7 +57,13 @@
         "interval": 30,
         "exec": "~/.config/waybar/scripts/disk_toggle.sh",
         "on-click": "~/.config/waybar/scripts/disk_toggle.sh toggle; pkill -RTMIN+8 waybar",
-        "signal": 8
+        "signal": 8,
+        "format": "{icon} {text}%",
+        "format-icons": {
+            "home": "󰋊",
+            "root": "󰋊"
+        },
+        "tooltip-format": "Usage ({alt}): {text}%"
     },
     "temperature#cpu": {
         // "thermal-zone": 2,
@@ -67,7 +73,7 @@
     },
     "backlight": {
         // "device": "acpi_video1",
-        "format": "{percent}% {icon}",
+        "format": "{icon} {percent}%",
         "format-icons": ["", ""]
     },
     "battery": {
@@ -76,10 +82,9 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
-        "format-plugged": "{capacity}% ",
-        "format-alt": "{time} {icon}",
+        "format": "{icon} {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
         "format-icons": ["", "", "", "", ""]
     },
     "power-profiles-daemon": {
@@ -103,7 +108,7 @@
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
-        "format": "{volume}% {icon} {format_source}",
+        "format": "{volume}% {icon}  {format_source}",
         "format-bluetooth": "{volume}% {icon} {format_source}",
         "min-length": 13,
         "format-bluetooth-muted": "󰖁 {icon} {format_source}",
