@@ -1,4 +1,3 @@
-
 * {
     /* `otf-font-awesome` is required to be installed for icons */
     font-family: "JetBrainsMono Nerd Font";
@@ -53,20 +52,13 @@ window#waybar.hidden {
 }
 
 #clock,
-#cpu,
-#memory,
-#custom-disk,
-#temperature,
-#backlight,
 #network,
 #pulseaudio,
-#tray,
-#mode,
-#power-profiles-daemon
-#custom-idle-inhibit {
+#mode {
     padding: 0 8px;
     background-color: #282828;
     color: #ebdbb2;
+    border-radius: 8px;
 }
 
 #window,
@@ -84,8 +76,101 @@ window#waybar.hidden {
     margin-right: 0;
 }
 
+label:focus {
+    background-color: #000000;
+}
+
+tooltip {
+    background-color: #282828;
+    border: 2px solid #504945;
+    border-radius: 8px;
+}
+
+tooltip label {
+    color: #ebdbb2;
+    padding: 4px;
+}
+
 #clock {
     color: #8ec07c;
+}
+
+#network {
+    color: #fb4934;
+}
+
+#network.disconnected {
+    background-color: #fb4934;
+    color: #282828;
+}
+
+#pulseaudio {
+    color: #fe8019;
+    margin: 0 2px;
+}
+
+#pulseaudio.muted {
+    background-color: #fe8019;
+    color: #282828; 
+}
+
+
+/* ---------------------------------------------------------
+   Waybar groups
+   --------------------------------------------------------- */
+/* The outer container holds the background and the rounded corners */
+#power, #hardware, #custom-tray {
+    background-color: #3c3836;
+    border-radius: 8px;
+    margin: 0 0 0 4px;
+}
+
+#backlight,
+#battery,
+#power-profiles-daemon,
+#memory,
+#cpu,
+#temperature,
+#custom-disk,
+#custom-idle-inhibit
+{
+    padding: 0 10px;
+    margin: 0;
+    border-radius: 0;
+}
+
+/* ---------------------------------------------------------
+   Hardware
+   --------------------------------------------------------- */
+#memory {
+    color: #b8bb26;
+}
+
+#cpu {
+    color: #d3869b;
+}
+
+#temperature {
+    color: #fabd2f;
+}
+
+#temperature.critical {
+    color: #f2594b;
+}
+
+#custom-disk {
+    color: #83a598;
+}
+
+/* ---------------------------------------------------------
+   Power
+   --------------------------------------------------------- */
+#backlight {
+    color: #8ec07c;
+}
+
+#battery {
+    color: #ebdbb2;
 }
 
 @keyframes blink {
@@ -102,73 +187,33 @@ window#waybar.hidden {
     animation-direction: alternate;
 }
 
-label:focus {
-    background-color: #000000;
-}
 
-tooltip {
-    background-color: #282828;
-    border: 2px solid #504945;
-    border-radius: 8px;
-}
-
-tooltip label {
-    color: #ebdbb2;
-    padding: 4px;
-}
-
-#backlight {
-    color: #458588;
-}
-
-#network {
-    color: #fb4934;
-}
-
-#network.disconnected {
-    background-color: #fb4934;
-    color: #282828;
-    border-radius: 8px;
-    margin: 0px 2px;
-}
-
-#pulseaudio {
+#power-profiles-daemon {
     color: #fe8019;
-    margin: 0 2px;
-    border-radius: 8px;
-}
-
-#pulseaudio.muted {
-    background-color: #fe8019;
-    color: #282828; 
-}
-
-
-
-#memory, #cpu, #temperature, #custom-disk,
-#backlight, #battery, #power-profiles-daemon, #tray, #custom-idle-inhibit {
-    background-color: #3c3836; 
-    margin: 0; 
-    padding: 0 10px;
-    border-radius: 0; 
+    padding: 0 14px 0 2px;
 }
 
 /* ---------------------------------------------------------
-   Tray (Left to Right)
+   Tray
    --------------------------------------------------------- */
+#custom-tray {
+    /* This group is the rightmost element therefore we set different roundings */
+    border-radius: 8px 0 0 8px;
+    padding-right: 6px;
+    padding-left: 0px;
+}
+
 #custom-idle-inhibit {
     color: #928374;
-    padding-right: 5px;
-    border-radius: 8px 0 0 8px;
-    margin-left: 4px;
+    padding-right: 6px;
+}
+
+#tray {
+    padding-left: 8px;
 }
 
 #custom-idle-inhibit.manual {
     color: #f2594b;
-}
-
-#tray {
-    padding: 0 0 0 10px;
 }
 
 #tray > .needs-attention {
@@ -176,54 +221,3 @@ tooltip label {
     color: #3c3836;
 }
 
-/* ---------------------------------------------------------
-   Hardware (Left to Right)
-   --------------------------------------------------------- */
-#memory {
-    color: #b8bb26; /* Green Text */
-    border-radius: 8px 0 0 8px; /* Round Left */
-    margin-left: 4px; /* Space from previous module */
-}
-
-#cpu {
-    color: #d3869b; /* Purple Text */
-}
-
-#temperature {
-    color: #fabd2f; /* Yellow Text */
-}
-
-#temperature.critical {
-    color: #f2594b;
-}
-
-#custom-disk {
-    color: #83a598; /* Blue Text */
-    border-radius: 0 8px 8px 0; /* Round Right */
-    margin-right: 4px; /* Space before next group */
-}
-
-/* ---------------------------------------------------------
-   Power (Left to Right)
-   --------------------------------------------------------- */
-#backlight {
-    color: #8ec07c; /* Aqua Text */
-    border-radius: 8px 0 0 8px; /* Round Left */
-}
-
-#battery {
-    color: #ebdbb2; /* Standard Light Text */
-}
-
-#power-profiles-daemon {
-    color: #fe8019; /* Orange Text */
-    border-radius: 0 8px 8px 0; /* Round Right */
-    padding: 0 16px 0 6px;
-}
-
-#custom-spacer {
-    background-color: #3c3836; 
-    padding: 0;
-    margin: 0;
-    min-width: 10px;
-}

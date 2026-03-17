@@ -5,7 +5,13 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["clock"],
-    "modules-right": ["pulseaudio", "network", "memory", "cpu", "temperature#cpu", "custom/disk", "backlight", "battery", "power-profiles-daemon", "custom/idle-inhibit", "tray", "custom/spacer"],
+    "modules-right": [
+        "pulseaudio",
+        "network",
+        "group/hardware",
+        "group/power",
+        "group/custom-tray"
+    ],
     // Modules configuration
     "sway/workspaces": {
         "format": "{name}: {icon}",
@@ -20,25 +26,11 @@
             "default": ""
         }
     },
-    "keyboard-state": {
-        "numlock": true,
-        "capslock": true,
-        "format": "{name} {icon}",
-        "format-icons": {
-            "locked": "",
-            "unlocked": ""
-        }
-    },
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
     "tray": {
-        // "icon-size": 21,
         "spacing": 10
-    },
-    "custom/spacer": {
-        "format": " ",
-        "tooltip": false
     },
     "clock": {
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
@@ -98,6 +90,30 @@
           "power-saver": ""
         }
     },
+    "group/power": {
+        "orientation": "inherit",
+        "modules": [
+            "backlight",
+            "battery",
+            "power-profiles-daemon"
+        ]
+    },
+    "group/hardware": {
+        "orientation": "inherit",
+        "modules": [
+            "memory",
+            "cpu",
+            "temperature",
+            "custom/disk"
+        ]
+    },
+    "group/custom-tray": {
+        "orientation": "inherit",
+        "modules": [
+            "custom/idle-inhibit",
+            "tray"
+        ]
+    },
     "network": {
         "interface": "enp0*", // (Optional) To force the use of this interface
         "format-ethernet": "{ipaddr}/{cidr} ",
@@ -108,7 +124,7 @@
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
-        "format": "{volume}% {icon}  {format_source}",
+        "format": "{volume}% {icon} {format_source}",
         "format-bluetooth": "{volume}% {icon} {format_source}",
         "min-length": 13,
         "format-bluetooth-muted": "󰖁 {icon} {format_source}",
