@@ -220,6 +220,9 @@ bindsym XF86MonBrightnessUp exec "brightnessctl -q -d intel_backlight set 10%+"
 
 focus_follows_mouse yes
 
+# Make sure that some useful xdg default dirs exist
+exec mkdir -p ~/Downloads ~/Pictures ~/Videos && xdg-user-dirs-update
+
 # Screen saver
 exec hypridle
 
@@ -242,7 +245,7 @@ for_window [class="MATLABWindow"] floating enable
 workspace_auto_back_and_forth yes
 
 # Screenshot
-bindsym Print exec 'grim -g "$(slurp)" -t png - | wl-copy'
+bindsym Print exec 'IMG=$(xdg-user-dir PICTURES)/$(date +%Y-%m-%d_%H-%m-%S).png && grim -g "$(slurp)" $IMG && wl-copy < $IMG'
 
 # Set opacity for un-forcused windows
 exec ~/scripts/inactive_windows_transparency.py
