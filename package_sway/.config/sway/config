@@ -177,24 +177,7 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-bar {
-	colors {
-		# Whole color settings
-		background #3c3836
-		statusline #ebdbb2
-		separator  #666666
-
-
-		focused_workspace  #458588 #458588 #ebdbb2
-		active_workspace   #83a598 #83a598 #ebdbb2
-		inactive_workspace #504945 #504945 #ebdbb2
-		urgent_workspace   #cc241d #cc241d #504945
-
-    }
-
-    tray_output primary
-    swaybar_command waybar
-}
+exec_always ~/.config/waybar/scripts/launch_waybar.sh
 
 # move workspace across screens
 bindsym $mod+z move workspace to output left
