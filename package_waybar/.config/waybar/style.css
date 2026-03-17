@@ -123,6 +123,7 @@ tooltip label {
     background-color: #3c3836;
     border-radius: 8px;
     margin: 0 0 0 4px;
+    padding: 0 5px;
 }
 
 #backlight,
@@ -134,7 +135,7 @@ tooltip label {
 #custom-disk,
 #custom-idle-inhibit
 {
-    padding: 0 10px;
+    padding: 0 5px;
     margin: 0;
     border-radius: 0;
 }
@@ -190,7 +191,7 @@ tooltip label {
 
 #power-profiles-daemon {
     color: #fe8019;
-    padding: 0 14px 0 2px;
+    padding-right: 10px;
 }
 
 /* ---------------------------------------------------------
@@ -199,8 +200,6 @@ tooltip label {
 #custom-tray {
     /* This group is the rightmost element therefore we set different roundings */
     border-radius: 8px 0 0 8px;
-    padding-right: 6px;
-    padding-left: 0px;
 }
 
 #custom-idle-inhibit {
