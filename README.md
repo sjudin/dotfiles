@@ -19,6 +19,7 @@ Fonts:
 - [JetBrains Mono Nerd Font](https://archlinux.org/packages/extra/any/ttf-jetbrains-mono-nerd/)
 - [Noto](https://fonts.google.com/noto)
   - [Noto Color Emoji](https://fonts.google.com/noto/specimen/Noto+Color+Emoji)
+- [FontAwesome 7](https://fontawesome.com/)
 
 These are the things that I use:
 - [zsh](https://www.zsh.org/)

@@ -1,6 +1,6 @@
 * {
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: "JetBrainsMono Nerd Font";
+    font-family: "JetBrainsMono Nerd Font", "Font Awesome 7 Free", "Font Awesome 7 Free Solid", "Font Awesome 7 Brands";
     font-size: 16px;
 }
 

@@ -4,6 +4,11 @@ theme = Gruvbox Material Dark
 font-family = JetBrainsMono Nerd Font
 font-size = 13.0
 
+font-family = "Noto Color Emoji"
+font-family = "Font Awesome 7 Free"
+font-family = "Font Awesome 7 Free Solid"
+font-family = "Font Awesome 7 Brands"
+
 cursor-style = block
 cursor-style-blink = false
 adjust-cursor-thickness=1
