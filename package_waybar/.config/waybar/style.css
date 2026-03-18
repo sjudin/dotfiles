@@ -119,7 +119,7 @@ tooltip label {
    Waybar groups
    --------------------------------------------------------- */
 /* The outer container holds the background and the rounded corners */
-#power, #hardware, #custom-tray {
+#power, #hardware, #custom-tray, #sound {
     background-color: #3c3836;
     border-radius: 8px;
     margin: 0 0 0 4px;
@@ -133,11 +133,31 @@ tooltip label {
 #cpu,
 #temperature,
 #custom-disk,
-#custom-idle-inhibit
+#custom-idle-inhibit,
+#wireplumber
 {
     padding: 0 5px;
     margin: 0;
     border-radius: 0;
+}
+/* ---------------------------------------------------------
+   Sound
+   --------------------------------------------------------- */
+#wireplumber.source {
+    color: #fe8019;
+}
+
+#wireplumber.sink {
+    color: #fe8019;
+}
+
+/* Notice the dot before muted instead of a hyphen */
+#wireplumber.source.muted {
+    color: #7c6f64;
+}
+
+#wireplumber.sink.muted {
+    color: #7c6f64;
 }
 
 /* ---------------------------------------------------------

@@ -28,29 +28,17 @@ if [ -z "$1" ]; then
 
     # 1. Print Sinks (Outputs)
     echo "$sinks_json" | jq -r --arg def "$default_sink" '
-      def get_icon:
-        if .properties."device.bus" == "bluetooth" then "bluetooth"
-        elif .properties."device.form_factor" == "headphone" then "audio-headphones"
-        elif .properties."device.form_factor" == "headset" then "audio-headset"
-        elif .properties."device.form_factor" == "speaker" then "audio-speakers"
-        else "audio-card" end;
-
       .[] | . as $sink | 
       select(
         if $sink.ports and $sink.active_port then
           ([$sink.ports[] | select(.name == $sink.active_port)][0].availability != "not available")
         else true end
       ) |
-      (if .name == $def then "[Current Sink] " else "[Sink] " end) + .description + "\u0000icon\u001f" + get_icon
+      (if .name == $def then "[Current Sink] " else "[Sink] " end) + .description + "\u0000icon\u001f" + .properties."device.icon_name"
     '
 
     # 2. Print Sources (Inputs)
     echo "$sources_json" | jq -r --arg def "$default_source" '
-      def get_icon:
-        if .properties."device.bus" == "bluetooth" then "bluetooth"
-        elif .properties."device.form_factor" == "headset" then "audio-headset"
-        else "audio-input-microphone" end;
-
       .[] | . as $src | 
       select(.name | endswith(".monitor") | not) |
       select(
@@ -58,7 +46,7 @@ if [ -z "$1" ]; then
           ([$src.ports[] | select(.name == $src.active_port)][0].availability != "not available")
         else true end
       ) |
-      (if .name == $def then "[Current Mic] " else "[Mic] " end) + .description + "\u0000icon\u001f" + get_icon
+      (if .name == $def then "[Current Mic] " else "[Mic] " end) + .description + "\u0000icon\u001f" + .properties."device.icon_name"
     '
     exit 0
 fi

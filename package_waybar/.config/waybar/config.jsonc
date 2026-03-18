@@ -9,8 +9,8 @@
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["clock"],
     "modules-right": [
-        "pulseaudio",
         "network",
+        "group/sound",
         "group/hardware",
         "group/power",
         "group/custom-tray"

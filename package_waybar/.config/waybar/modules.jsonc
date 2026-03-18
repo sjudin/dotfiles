@@ -85,6 +85,33 @@
             "power-saver": ""
         }
     },
+    "wireplumber#source": {
+        "node-type": "Audio/Source",
+        "format": "󰍬 {volume}%",
+        // "format-muted": "󰍭 {volume}%",
+        "on-right-click": "pavucontrol",
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+        "scroll-step": 5
+    },
+    "wireplumber#sink": {
+        "node-type": "Audio/Sink",
+        "format": "{icon} {volume}%",
+        "format-muted": " {volume}%",
+        "on-click-right": "pavucontrol",
+        "on-click": "wpctl set-mute @DEFAULT_SINK@ toggle",
+        "format-icons": [
+            "",
+            "",
+            ""
+        ]
+    },
+    "group/sound": {
+        "orientation": "inherit",
+        "modules": [
+            "wireplumber#source",
+            "wireplumber#sink"
+        ]
+    },
     "group/power": {
         "orientation": "inherit",
         "modules": [
