@@ -137,6 +137,11 @@ bindswitch --reload --locked lid:off exec ~/scripts/lid_action.sh open
 # When in clamshell mode we do not want to re-enable the laptop
 # display when sway is reloaded, this script handles that
 exec_always ~/scripts/lid_event_handler.sh
+# If we are in clamshell mode and unplug the external monitor we want to suspend
+# the computer, to handle this we run a small background script that checks for
+# changes in the number of connected monitors and suspends if all external screens
+# are disconnected and the laptop lid is closed
+exec ~/scripts/lid_clamshell_poll_suspend.sh
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
