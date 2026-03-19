@@ -52,6 +52,17 @@ files and setup these
 
 # Notes/Fixes
 
+## Disable systemd/logind sleep/suspend management
+Since we are using scripts and `hypridle` to handle sleep/suspend ourselves we need to disable logind:s management of laptop lid events so that they do not interfere. Add these lines to `/etc/systemd/logind.conf`
+
+```ini
+HandleLidSwitch=ignore
+HandleLidSwitchExternalPower=ignore
+HandleLidSwitchDocked=ignore
+```
+
+And reboot for it to take effect
+
 ## System suspends before screen lock fires when using SwayWM+hyprlock
 When suspending the system we want to lock it first, however the suspend command
 does not wait for the locker to finish before suspending since Sway does not implement

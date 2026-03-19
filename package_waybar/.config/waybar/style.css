@@ -134,6 +134,7 @@ tooltip label {
 #temperature,
 #custom-disk,
 #custom-idle-inhibit,
+#custom-lock-inhibit,
 #wireplumber
 {
     padding: 0 5px;
@@ -229,6 +230,14 @@ tooltip label {
 
 #tray {
     padding-left: 8px;
+}
+
+#custom-lock-inhibit {
+    color: #928374;
+}
+
+#custom-lock-inhibit.inhibited {
+    color: #f2594b;
 }
 
 #custom-idle-inhibit.manual {

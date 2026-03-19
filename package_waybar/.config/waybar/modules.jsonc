@@ -43,6 +43,17 @@
         },
         "tooltip-format": "Usage ({alt}): {text}%"
     },
+    "custom/lock-inhibit": {
+        "format": "{icon}",
+        "return-type": "json",
+        "exec": "~/.config/waybar/scripts/lock_inhibit.sh",
+        "on-click": "if [ -f /tmp/hypridle_inhibited ]; then rm /tmp/hypridle_inhibited; else touch /tmp/hypridle_inhibited; fi",
+        "format-icons": {
+            "inhibited": "",
+            "active": ""
+        },
+        "tooltip": true
+    },
     "temperature#cpu": {
         // "thermal-zone": 2,
         "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
@@ -137,6 +148,7 @@
     "group/custom-tray": {
         "orientation": "inherit",
         "modules": [
+            "custom/lock-inhibit",
             "custom/idle-inhibit",
             "tray"
         ]
