@@ -97,6 +97,7 @@ tooltip label {
 
 #network {
     color: #fb4934;
+    margin: 0 6px 0 0;
 }
 
 #network.disconnected {
@@ -212,7 +213,7 @@ tooltip label {
 
 #power-profiles-daemon {
     color: #fe8019;
-    padding-right: 10px;
+    padding-right: 12px;
 }
 
 /* ---------------------------------------------------------

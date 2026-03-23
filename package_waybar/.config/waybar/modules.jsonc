@@ -61,10 +61,17 @@
         "format": " {temperatureC}°C"
     },
     "backlight": {
-        // "device": "acpi_video1",
         "format": "{icon} {percent}%",
         "format-icons": [
-            "",
+            "󱃓",
+            "󰪞",
+            "󰪟",
+            "󰪠",
+            "󰪡",
+            "󰪢",
+            "󰪣",
+            "󰪤",
+            "󰪥",
             ""
         ]
     },
@@ -111,7 +118,6 @@
         "on-click-right": "pavucontrol",
         "on-click": "wpctl set-mute @DEFAULT_SINK@ toggle",
         "format-icons": [
-            "",
             "",
             ""
         ]
@@ -125,9 +131,14 @@
     },
     "group/power": {
         "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 300,
+            "transition-left-to-right": false,
+            "click-to-reveal": true,
+        },
         "modules": [
-            "backlight",
             "battery",
+            "backlight",
             "power-profiles-daemon"
         ]
     },
