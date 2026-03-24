@@ -9,7 +9,7 @@ font pango: JetBrainsMono Nerd Font 11
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec ghostty
+bindsym $mod+Return exec ghostty +new-window
 
 # kill focused window
 bindsym $mod+Shift+Q kill
@@ -221,6 +221,9 @@ exec systemctl --user start hyprpolkitagent.service
 
 # Enables inhibit_idle when playing audio
 exec ~/.local/bin/wayland-pipewire-idle-inhibit
+
+# Start background ghostty to improve startup times
+exec_always systemctl --user start app-com.mitchellh.ghostty.service
 
 exec wl-paste --type text --watch cliphist store
 exec wl-paste --type image --watch cliphist store
