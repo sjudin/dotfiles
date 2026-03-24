@@ -10,17 +10,22 @@ window.eDP-1 * {
 }
 
 window#waybar {
-    background-color: #282828;
+    background: rgba(40, 40, 40, 0.8);
 }
 
 window#waybar.hidden {
     opacity: 0.2;
 }
 
+window#waybar > box {
+    border: 1px solid #e78a4e;
+    border-radius: 8px;
+    padding: 5px;
+}
+
 #workspaces button {
-    margin: 0 2px; 
+    margin-right: 4px; 
     padding: 0 16px 0 12px;
-    background-color: #282828;
     color: #ebdbb2;
     border-radius: 8px; 
 
@@ -33,10 +38,15 @@ window#waybar.hidden {
     transition: none;
     -gtk-icon-shadow: none;
     -gtk-icon-effect: none;
+
+    transition-property: background-color;
+    transition-duration: .2s;
+    border: 1px solid transparent;
 }
 
 #workspaces button.focused {
     background-color: #504945;
+    border: 1px solid #ebdbb2;
 }
 
 #workspaces button:hover {
@@ -55,25 +65,10 @@ window#waybar.hidden {
 #network,
 #pulseaudio,
 #mode {
-    padding: 0 8px;
+    padding: 0 10px;
     background-color: #282828;
     color: #ebdbb2;
     border-radius: 8px;
-}
-
-#window,
-#workspaces {
-    margin: 0 2px;
-}
-
-/* If workspaces is the leftmost module, omit left margin */
-.modules-left > widget:first-child > #workspaces {
-    margin-left: 0;
-}
-
-/* If workspaces is the rightmost module, omit right margin */
-.modules-right > widget:last-child > #workspaces {
-    margin-right: 0;
 }
 
 label:focus {
@@ -120,10 +115,10 @@ tooltip label {
    Waybar groups
    --------------------------------------------------------- */
 /* The outer container holds the background and the rounded corners */
-#power, #hardware, #custom-tray, #sound {
+#power, #hardware, #custom-tray, #sound, #custom-tray {
     background-color: #3c3836;
     border-radius: 8px;
-    margin: 0 0 0 4px;
+    margin-left: 4px;
     padding: 0 5px;
 }
 
@@ -219,11 +214,6 @@ tooltip label {
 /* ---------------------------------------------------------
    Tray
    --------------------------------------------------------- */
-#custom-tray {
-    /* This group is the rightmost element therefore we set different roundings */
-    border-radius: 8px 0 0 8px;
-}
-
 #custom-idle-inhibit {
     color: #928374;
     padding-right: 6px;
