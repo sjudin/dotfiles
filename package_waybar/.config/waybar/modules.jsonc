@@ -1,15 +1,20 @@
 {
     "sway/workspaces": {
-        "format": "{name}: {icon}",
-        "format-icons": {
-            "1": "",
-            "2": "",
-            "5": "",
-            "9": "",
-            "10": "",
-            "urgent": "",
-            // "focused": "",
-            "default": ""
+        "format": "{name}: {windows}",
+        "window-rewrite-default": "",
+        "window-rewrite": {
+            "com.mitchellh.ghostty": "<span font='Font Awesome 7 Free'></span>",
+            "brave-browser": "<span font='Font Awesome 7 Free'></span>",
+            "google-chrome": "<span font='Font Awesome 7 Free'></span>",
+            "Slack": "<span font='Font Awesome 7 Free'></span>",
+            "spotify": "<span font='Font Awesome 7 Free'></span>",
+            "org.gnome.Nautilus": "<span font='Font Awesome 7 Free'></span>",
+            "wdisplays": "<span font='Font Awesome 7 Free'></span>",
+            "class<Foxglove>": "<span font='Font Awesome 7 Free'></span>",
+            "class<Vial>": "<span font='Font Awesome 7 Free'></span>",
+            "title<[n]?vim>": "",
+            "title<.*tm-manager.*>": "",
+            "title<ssh.*>": "<span font='Font Awesome 7 Free'></span>"
         }
     },
     "sway/mode": {
