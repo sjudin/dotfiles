@@ -3,6 +3,10 @@
         "~/.config/waybar/modules.jsonc"
     ],
     "position": "bottom", // Waybar position (top|bottom|left|right)
+    "margin-bottom": 8,
+    // "margin-top": 8, this is handled by window manager gaps
+    "margin-left": 5,
+    "margin-right": 5,
     "reload_style_on_change": true,
     "spacing": 0, // Gaps between modules (4px)
     // Choose the order of the modules

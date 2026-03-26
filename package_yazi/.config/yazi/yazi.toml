@@ -3,7 +3,7 @@ linemode = "size"
 
 [opener]
 imv_open = [
-	{ run = "imv %s", desc = "Open" },
+	{ run = "imv -n %s1 %d1", desc = "Open" },
 ]
 
 [open]
