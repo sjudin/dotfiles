@@ -44,8 +44,8 @@ These are the things that I use:
   - [imv](https://git.sr.ht/~exec64/imv/)
 - [fzf](https://github.com/junegunn/fzf)
 - [keychain](https://github.com/danielrobbins/keychain)
-- [lightdm](https://github.com/canonical/lightdm)
-  - [lightdm-gtk-greeter](https://github.com/Xubuntu/lightdm-gtk-greeter)
+- [greetd](https://sr.ht/~kennylevinsen/greetd/)
+  - [nwg-hello](https://github.com/nwg-piotr/nwg-hello)
 
 NOTE: There may be dependencies and other stuff not listed here, go over the config
 files and setup these
