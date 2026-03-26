@@ -27,7 +27,7 @@ These are the things that I use:
 - [oh-my-posh](https://ohmyposh.dev/)
 - [ghostty](https://ghostty.org/)
 - [tmux](https://github.com/tmux/tmux/wiki)
-- [sway](https://swaywm.org/)
+- [SwayFX](https://github.com/WillPower3309/swayfx)
   - [grim](https://gitlab.freedesktop.org/emersion/grim)
   - [slurp](https://github.com/emersion/slurp)
   - [waybar](https://github.com/Alexays/Waybar)

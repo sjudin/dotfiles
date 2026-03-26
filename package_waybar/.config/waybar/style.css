@@ -10,7 +10,7 @@ window.eDP-1 * {
 }
 
 window#waybar {
-    background: rgba(40, 40, 40, 0.8);
+    background: transparent;
 }
 
 window#waybar.hidden {
@@ -18,7 +18,7 @@ window#waybar.hidden {
 }
 
 window#waybar > box {
-    border: 1px solid #e78a4e;
+    border: 1px solid #B96E3E;
     border-radius: 8px;
     padding: 5px;
 }
