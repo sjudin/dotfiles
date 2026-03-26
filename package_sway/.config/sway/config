@@ -118,17 +118,16 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 
 # default layout
 input type:keyboard {
-  xkb_layout se(nodeadkeys)
-  # xkb_layout se
+  xkb_layout se
   repeat_delay 300
   repeat_rate 40
+  xkb_options caps:swapescape
 }
 
-# Swap caps/esc on standard keyboards
-input "1:1:AT_Translated_Set_2_keyboard" {
-   xkb_options caps:swapescape
+input "48875:1:beekeeb_piantor_Keyboard" {
+  xkb_options ""
+  xkb_layout se(nodeadkeys)
 }
-
 
 # Lid open/closed behaviour. If no external screen is connected, suspend. If
 # one or more screens are connected then we disable the laptop screen (clamshell mode)
@@ -221,7 +220,7 @@ exec swaync
 exec systemctl --user start hyprpolkitagent.service
 
 # Enables inhibit_idle when playing audio
-exec ~/.local/bin/wayland-pipewire-idle-inhibit
+exec_always systemctl --user start wayland-pipewire-idle-inhibit.service
 
 # Start background ghostty to improve startup times
 exec_always systemctl --user start app-com.mitchellh.ghostty.service
