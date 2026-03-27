@@ -14,7 +14,8 @@
             "class<Vial>": "<span font='Font Awesome 7 Free'></span>",
             "title<[n]?vim>": "",
             "title<.*tm-manager.*>": "",
-            "title<ssh.*>": "<span font='Font Awesome 7 Free'></span>"
+            "title<ssh.*>": "<span font='Font Awesome 7 Free'></span>",
+            "title<arch-update>": "<span font='Font Awesome 7 Free'></span>"
         }
     },
     "sway/mode": {

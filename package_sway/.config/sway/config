@@ -235,11 +235,20 @@ blur_radius 4
 blur_noise 0.02
 
 corner_radius 8
+
+layer_effects "waybar" {
+    blur enable;
+    blur enable
+    blur_passes 3
+    blur_radius 4
+    blur_noise 0.02
+}
 # end SwayFX
 
 # Floating windows
 for_window [instance="gimp"] floating enable
 for_window [class="MATLABWindow"] floating enable
+for_window [title="^(Save File|Open File|Save As|Open|Choose Files|Select Folder)$"] floating enable
 
 workspace_auto_back_and_forth yes
 
@@ -254,6 +263,6 @@ exec ~/scripts/inactive_windows_transparency.py
 exec_always --no-startup-id "bash ~/.config/sway/tray.sh"
 
 # wallpaper
-exec_always swaybg -i ~/wallpaper.png
+exec_always swaybg -i ~/gruv.jpg
 
 include /etc/sway/config.d/*
