@@ -248,7 +248,7 @@ layer_effects "waybar" {
 # Floating windows
 for_window [instance="gimp"] floating enable
 for_window [class="MATLABWindow"] floating enable
-for_window [title="^(Save File|Open File|Save As|Open|Choose Files|Select Folder)$"] floating enable
+for_window [title="^(Save Files?|Open Files?|Save As|Open|Choose Files?|Select Folders?)$"] floating enable
 
 workspace_auto_back_and_forth yes
 
