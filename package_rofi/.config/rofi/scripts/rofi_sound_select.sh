@@ -34,8 +34,16 @@ if [ -z "$1" ]; then
           ([$sink.ports[] | select(.name == $sink.active_port)][0].availability != "not available")
         else true end
       ) |
-      (if .name == $def then "[Current Sink] " else "[Sink] " end) + .description + "\u0000icon\u001f" + .properties."device.icon_name"
-    '
+      # Determine a better icon based on the active port or description
+      (if (.active_port | contains("headphones")) then "audio-headphones"
+       elif (.active_port | contains("hdmi")) then "video-display"
+       elif (.active_port | contains("bluetooth")) then "bluetooth"
+       else "audio-speakers" end) as $best_icon |
+
+      ((if .name == $def then "[Current Sink] " else "[Sink] " end) + .description) + "|" + $best_icon
+    ' | while IFS="|" read -r desc icon; do
+        printf "%s\0icon\x1f%s\n" "$desc" "$icon"
+    done
 
     # 2. Print Sources (Inputs)
     echo "$sources_json" | jq -r --arg def "$default_source" '
@@ -46,8 +54,12 @@ if [ -z "$1" ]; then
           ([$src.ports[] | select(.name == $src.active_port)][0].availability != "not available")
         else true end
       ) |
-      (if .name == $def then "[Current Mic] " else "[Mic] " end) + .description + "\u0000icon\u001f" + .properties."device.icon_name"
-    '
+
+      "audio-input-microphone" as $best_icon |
+      ((if .name == $def then "[Current Mic] " else "[Mic] " end) + .description) + "|" + $best_icon
+    ' | while IFS="|" read -r desc icon; do
+        printf "%s\0icon\x1f%s\n" "$desc" "$icon"
+    done
     exit 0
 fi
 
