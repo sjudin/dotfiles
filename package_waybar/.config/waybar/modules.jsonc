@@ -15,7 +15,8 @@
             "title<[n]?vim>": "",
             "title<.*tm-manager.*>": "",
             "title<ssh.*>": "<span font='Font Awesome 7 Free'></span>",
-            "title<arch-update>": "<span font='Font Awesome 7 Free'></span>"
+            "title<arch-update>": "<span font='Font Awesome 7 Free'></span>",
+            "title<Steam>": "<span font='Font Awesome 7 Free'></span>"
         }
     },
     "sway/mode": {
@@ -140,7 +141,7 @@
         "drawer": {
             "transition-duration": 300,
             "transition-left-to-right": false,
-            "click-to-reveal": true,
+            "click-to-reveal": true
         },
         "modules": [
             "battery",
@@ -153,7 +154,8 @@
         "drawer": {
             "transition-duration": 300,
             "transition-left-to-right": false,
-            "click-to-reveal": true
+            "click-to-reveal": true,
+            "start-expanded": true
         },
         "modules": [
             "cpu",
