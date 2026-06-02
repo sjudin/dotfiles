@@ -10,13 +10,16 @@
             "spotify": "<span font='Font Awesome 7 Free'></span>",
             "org.gnome.Nautilus": "<span font='Font Awesome 7 Free'></span>",
             "wdisplays": "<span font='Font Awesome 7 Free'></span>",
+            "org.wireshark.Wireshark": "󱙳",
             "class<Foxglove>": "<span font='Font Awesome 7 Free'></span>",
             "class<Vial>": "<span font='Font Awesome 7 Free'></span>",
             "title<[n]?vim>": "",
             "title<.*tm-manager.*>": "",
             "title<ssh.*>": "<span font='Font Awesome 7 Free'></span>",
             "title<arch-update>": "<span font='Font Awesome 7 Free'></span>",
-            "title<Steam>": "<span font='Font Awesome 7 Free'></span>"
+            "title<Steam>": "<span font='Font Awesome 7 Free'></span>",
+            "title<Gmail.*>": "<span font='Font Awesome 7 Free'></span>",
+            "title<.*Calendar.*>": "<span font='Font Awesome 7 Free'></span>"
         }
     },
     "sway/mode": {
@@ -141,7 +144,8 @@
         "drawer": {
             "transition-duration": 300,
             "transition-left-to-right": false,
-            "click-to-reveal": true
+            "click-to-reveal": true,
+            "start-expanded": true
         },
         "modules": [
             "battery",
@@ -155,7 +159,7 @@
             "transition-duration": 300,
             "transition-left-to-right": false,
             "click-to-reveal": true,
-            "start-expanded": true
+            "start-expanded": false
         },
         "modules": [
             "cpu",
