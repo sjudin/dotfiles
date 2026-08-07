@@ -4,11 +4,12 @@ bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 
 function y() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	local tmp cwd
+	tmp="$(mktemp -t "yazi-cwd.XXXXXX")" || return
 	yazi "$@" --cwd-file="$tmp"
-	IFS= read -r -d '' cwd < "$tmp"
-	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+	cwd="$(<"$tmp")"
 	rm -f -- "$tmp"
+	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
 }
 
 _t_widget() {
@@ -77,8 +78,8 @@ source "$OMP_CACHE"
 
 fpath=(~/.zfunc $fpath)
 
-source $HOME/.aliases
-source $HOME/.zscripts/gwt_sync.zsh
+source "$HOME/.aliases"
+source "$HOME/.zscripts/gwt_sync.zsh"
 
 # ==========================================
 # Fast & Reliable Keychain Loading
@@ -91,7 +92,7 @@ fi
 # Check if the ssh-agent is actually reachable AND has your key loaded
 if ! ssh-add -l >/dev/null 2>&1; then
     # If the agent is dead or empty (e.g., after a reboot), run keychain
-    eval $(keychain --eval id_ed25519 --quiet)
+    eval "$(keychain --eval id_ed25519 --quiet)"
 fi
 
 ### Added by Zinit's installer

@@ -2,9 +2,9 @@
 
 pkill -f blueman-applet
 pkill -f iwgtk
-pkill -f arch-update
+# pkill -f arch-update
 
 blueman-applet &
 iwgtk -i &
-arch-update --tray &
+# arch-update --tray &
 

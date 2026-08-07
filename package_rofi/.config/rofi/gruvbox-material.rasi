@@ -37,8 +37,8 @@ inputbar {
     color: @fg0;
     padding: 14;
     background-color: @bg0;
-    border-radius: 5;         /* Rounds the corners */
-    margin: 10 10 10 10;       /* Detaches it from the edges of the window */
+    border-radius: 5;
+    margin: 10 10 10 10;
 }
 
 message {
@@ -49,22 +49,21 @@ message {
 }
 
 mode-switcher {
-    margin: 0 10 10 10;        /* Detaches from edges and bottom */
+    margin: 0 10 10 10;
     border-radius: 5;
-    spacing: 10; /* Adds space between the individual buttons */
-    padding: 10; /* Keeps it neatly padded at the bottom */
+    spacing: 10;
+    padding: 10;
     background-color: @bg0;
 }
 
 button {
     padding: 8;
-    border-radius: 5; /* Matches your element rounding */
-    background-color: @bg1; /* Unselected tab color */
-    background-color: transparent; /* Unselected tab color */
+    border-radius: 5;
+    background-color: transparent;
     text-color: @fg0;
     cursor: pointer;
-    horizontal-align: 0.5; /* Centers the content horizontally */
-    vertical-align: 0.5;   /* Centers the content vertically */
+    horizontal-align: 0.5;
+    vertical-align: 0.5;
 }
 
 button selected {
@@ -73,11 +72,11 @@ button selected {
 }
 
 listview {
-    margin: 0 10 10 10;        /* Creates a 10px gap on the bottom, left, and right */
-    padding: 12 12 12 12;      /* Keeps the scrollbar from overlapping */
+    margin: 0 10 10 10;
+    padding: 12 12 12 12;
     spacing: 8;
-    border-radius: 5;          /* Matches the 5px rounding of the search bar */
-    border: 0;                 /* Removes the weird outline */
+    border-radius: 5;
+    border: 0;
     border-color: @bg0;
     background-color: @bg0;
     dynamic: false;
@@ -85,13 +84,13 @@ listview {
 }
 
 scrollbar {
-    width: 6px;                  /* Thickness of the scrollbar */
+    width: 6px;
     border-radius: 5;
-    handle-width: 6px;           /* Makes the handle match the track width */
-    handle-color: @grey0;        /* The earthy brown color of the scroll thumb */
-    background-color: @bg1;      /* The slightly lighter background for the track */
+    handle-width: 6px;
+    handle-color: @grey0;
+    background-color: @bg1;
     padding: 0;
-    margin: 0 0 0 3px;          /* Adds a tiny gap between the text and the scrollbar */
+    margin: 0 0 0 3px;
 }
 
 textbox {
@@ -105,7 +104,7 @@ error-message {
 
 entry, prompt, case-indicator {
     text-color: inherit;
-    background-color: transparent; /* Forces the inner boxes to be invisible */
+    background-color: transparent;
 }
 
 prompt {
@@ -119,7 +118,6 @@ element {
     background-color: transparent;
 }
 
-/* Force standard unselected rows to be invisible */
 element.normal.normal {
     background-color: transparent; 
 }

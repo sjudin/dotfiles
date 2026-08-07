@@ -115,7 +115,7 @@ tooltip label {
    Waybar groups
    --------------------------------------------------------- */
 /* The outer container holds the background and the rounded corners */
-#power, #hardware, #custom-tray, #sound, #custom-tray {
+#power, #hardware, #custom-tray, #sound {
     background-color: #3c3836;
     border-radius: 8px;
     margin-left: 4px;
@@ -239,4 +239,3 @@ tooltip label {
     background-color: #fbf1c7;
     color: #3c3836;
 }
-

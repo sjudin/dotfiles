@@ -129,6 +129,11 @@ input "48875:1:beekeeb_piantor_Keyboard" {
   xkb_layout se(nodeadkeys)
 }
 
+input "5824:10203:Glove80_Keyboard" {
+  xkb_options ""
+  xkb_layout se(nodeadkeys)
+}
+
 # Lid open/closed behaviour. If no external screen is connected, suspend. If
 # one or more screens are connected then we disable the laptop screen (clamshell mode)
 bindswitch --reload --locked lid:on exec ~/scripts/lid_action.sh closed
