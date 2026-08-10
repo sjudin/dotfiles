@@ -14,6 +14,7 @@ cursor-style-blink = false
 adjust-cursor-thickness=1
 shell-integration-features = no-cursor,ssh-terminfo,ssh-env
 clipboard-trim-trailing-spaces = true
+clipboard-read = allow
 
 mouse-hide-while-typing = true
 window-decoration = false
