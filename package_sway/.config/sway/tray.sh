@@ -6,5 +6,5 @@ pkill -f arch-update
 
 blueman-applet &
 iwgtk -i &
-arch-update --tray
+sleep 3 && arch-update --tray
 
