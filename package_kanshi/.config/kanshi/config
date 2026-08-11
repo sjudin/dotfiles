@@ -1,0 +1,7 @@
+profile dual-acer {
+    # Right monitor
+    output DP-2 mode 1920x1080@143.981 position 1920,0
+
+    # Left monitor
+    output DP-1 mode 1920x1080@143.981 position 0,0
+}

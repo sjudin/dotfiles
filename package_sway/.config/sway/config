@@ -230,6 +230,9 @@ exec_always systemctl --user start wayland-pipewire-idle-inhibit.service
 # Start background ghostty to improve startup times
 exec_always systemctl --user start app-com.mitchellh.ghostty.service
 
+# Automatic display management
+exec_always "pkill kanshi; kanshi"
+
 exec wl-paste --type text --watch cliphist store
 exec wl-paste --type image --watch cliphist store
 
@@ -238,6 +241,8 @@ blur enable
 blur_passes 3
 blur_radius 4
 blur_noise 0.02
+
+animation_duration_ms 0
 
 corner_radius 8
 
