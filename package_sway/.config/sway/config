@@ -231,7 +231,7 @@ exec_always systemctl --user start wayland-pipewire-idle-inhibit.service
 exec_always systemctl --user start app-com.mitchellh.ghostty.service
 
 # Automatic display management
-exec_always "pkill kanshi; kanshi"
+exec_always "pkill kanshi; systemd-cat --identifier=kanshi kanshi"
 
 exec wl-paste --type text --watch cliphist store
 exec wl-paste --type image --watch cliphist store
