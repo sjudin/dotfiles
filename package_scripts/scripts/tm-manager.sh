@@ -98,11 +98,32 @@ delete_tmux_session() {
 # if in tmux, we list the current sessions and also give a "New session"/"Delete session"
 # options which can be used to create and switch to a new session or delete sessions
 if [ "$TERM_PROGRAM" = "tmux" ]; then
-    tmux_session=$((tmux list-sessions -F '#{session_name}'; echo "New session"; echo "Delete session") | _fzf_ui --prompt="🖥️ Session > ")
+    current_session_id=$(tmux display-message -p '#{session_id}')
+    current_session_name=$(tmux display-message -p '#{session_name}')
+    tmux_format=$(printf '#{session_activity}\t#{session_id}\t#{session_name}')
+    tmux_selection=$(
+        {
+            tmux list-sessions -F "$tmux_format" |
+                sort -t $'\t' -k1,1nr |
+                while IFS=$'\t' read -r _session_activity session_id session_name; do
+                    if [ "$session_id" = "$current_session_id" ]; then
+                        continue
+                    fi
+                    printf '%s\t%s\n' "$session_id" "$session_name"
+                done
+            printf '%s\t%s\n' "new-session" "New session"
+            printf '%s\t%s\n' "delete-session" "Delete session"
+        } | _fzf_ui --delimiter=$'\t' --with-nth=2 --prompt="🖥️ Session > " \
+            --header="Current: $current_session_name"
+    )
 
-    if [ "$tmux_session" = "New session" ]; then
+    # fzf displays only the session name; keep the stable tmux session ID
+    # from the hidden first column for the actual switch.
+    tmux_session="${tmux_selection%%$'\t'*}"
+
+    if [ "$tmux_session" = "new-session" ]; then
         new_tmux_session "$1"
-    elif [ "$tmux_session" = "Delete session" ]; then
+    elif [ "$tmux_session" = "delete-session" ]; then
         delete_tmux_session
     elif [ -n "$tmux_session" ]; then
         tmux switch -t "$tmux_session"
