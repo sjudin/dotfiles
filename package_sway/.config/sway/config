@@ -232,6 +232,7 @@ exec_always systemctl --user start app-com.mitchellh.ghostty.service
 
 # Automatic display management
 exec_always "pkill kanshi; systemd-cat --identifier=kanshi kanshi"
+exec_always systemd-cat --identifier=kanshi-hotplug ~/.config/kanshi/reapply-on-hotplug.sh
 
 exec wl-paste --type text --watch cliphist store
 exec wl-paste --type image --watch cliphist store

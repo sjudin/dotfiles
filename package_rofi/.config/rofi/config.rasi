@@ -13,6 +13,9 @@ configuration {
   Audio {
     display-name: "󰓃";
   }
+  Displays {
+    display-name: "󰍹 ";
+  }
   display-ssh:    " ";
   display-run:    " ";
   display-drun:   " ";
@@ -20,7 +23,7 @@ configuration {
   display-combi:  " ";
   show-icons:     true;
 
-  modi: "drun,Audio:~/.config/rofi/scripts/rofi_sound_select.sh,Clipboard:~/.config/rofi/scripts/rofi_clipboard.sh";
+  modi: "drun,Audio:~/.config/rofi/scripts/rofi_sound_select.sh,Displays:~/.config/rofi/scripts/rofi_kanshi_profile.sh,Clipboard:~/.config/rofi/scripts/rofi_clipboard.sh";
 }
 
 @theme "~/.config/rofi/gruvbox-material.rasi"

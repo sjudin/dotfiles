@@ -1,7 +1,43 @@
-profile dual-acer {
+profile dual_acer {
     # Right monitor
-    output DP-2 mode 1920x1080@143.981 position 1920,0
+    output DP-2 enable mode 1920x1080@143.981 position 1920,0
 
     # Left monitor
-    output DP-1 mode 1920x1080@143.981 position 0,0
+    output DP-1 enable mode 1920x1080@143.981 position 0,0
+}
+
+profile home_office {
+    # Left monitor
+    output HDMI-A-1 enable mode 1920x1080@143.981 position 0,0
+
+    # Laptop screen
+    output eDP-1 enable mode 2560x1600@60.001 position 1920,280 scale 2
+
+    # Reassert positions after Sway has re-enabled the external output.
+    exec swaymsg output HDMI-A-1 position 0 0
+    exec swaymsg output eDP-1 position 1920 280
+}
+
+profile office {
+    # ASUS monitor on the left (matched by identity so either USB-C port works)
+    output "ASUSTek COMPUTER INC PA278CV M5LMQS154664" enable mode 2560x1440@74.924 position 0,0
+
+    # Laptop screen on the right, vertically centered
+    output eDP-1 enable mode 2560x1600@60.001 position 2560,219 scale 2
+
+    # Reassert positions after Sway has enabled the outputs.
+    exec swaymsg output '"ASUSTek COMPUTER INC PA278CV M5LMQS154664"' position 0 0
+    exec swaymsg output eDP-1 position 2560 219
+}
+
+# Automatic fallback when no external display is connected. This profile is
+# unnamed so it does not appear in the Rofi profile picker.
+profile {
+    output eDP-1 enable mode 2560x1600@60.001 position 0,0 scale 2
+}
+
+profile solo_laptop {
+    output eDP-1 enable mode 2560x1600@60.001 position 0,0 scale 2
+    ...output "*" disable
+    exec swaymsg output eDP-1 position 0 0
 }
