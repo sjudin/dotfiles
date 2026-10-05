@@ -2,12 +2,16 @@
 linemode = "size"
 
 [opener]
+foxglove = [
+	{ run = "foxglove-studio %s", desc = "Foxglove", orphan = true },
+]
 imv_open = [
 	{ run = "imv -n %s1 %d1", desc = "Open" },
 ]
 
 [open]
 prepend_rules = [
+	{ url = "*.mcap", use = [ "foxglove", "open", "reveal" ] },
 	{ mime="image/*", use = [ "imv_open", "reveal" ] },
     { url = "*.html", use = [ "open", "edit" ] }
 ]
