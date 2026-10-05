@@ -4,6 +4,7 @@
         "window-rewrite-default": "",
         "window-rewrite": {
             "com.mitchellh.ghostty": "<span font='Font Awesome 7 Free'></span>",
+            "class<com[.]mitchellh[.]ghostty> title<codex .*>": "<span font='Font Awesome 7 Free'></span>",
             "brave-browser": "<span font='Font Awesome 7 Free'></span>",
             "google-chrome": "<span font='Font Awesome 7 Free'></span>",
             "Slack": "<span font='Font Awesome 7 Free'></span>",

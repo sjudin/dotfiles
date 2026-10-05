@@ -12,6 +12,15 @@ function y() {
 	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
 }
 
+# Label standalone Codex windows for Waybar; keep tmux launches unchanged.
+function codex() {
+    if [[ -z "${TMUX-}" ]]; then
+        command codex -c 'tui.terminal_title=["app-name","spinner","project"]' "$@"
+    else
+        command codex "$@"
+    fi
+}
+
 _t_widget() {
     zle push-line
     BUFFER="~/scripts/tm-manager.sh"
