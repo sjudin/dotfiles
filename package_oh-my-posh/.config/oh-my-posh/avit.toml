@@ -1,6 +1,7 @@
 version = 3
 final_space = true
 enable_cursor_positioning = true
+console_title_template = "{{ .PWD }}"
 
 [transient_prompt]
   type = 'text'
