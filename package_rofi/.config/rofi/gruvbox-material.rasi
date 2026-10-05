@@ -24,7 +24,7 @@ window {
     width: 600;
 
     border: 2;
-    border-radius: 5;
+    border-radius: 8;
     border-color: @orange;
 }
 
@@ -37,20 +37,20 @@ inputbar {
     color: @fg0;
     padding: 14;
     background-color: @bg0;
-    border-radius: 5;
+    border-radius: 8;
     margin: 10 10 10 10;
 }
 
 message {
     padding: 10;
-    border-radius: 5;
+    border-radius: 8;
     background-color: @bg1;
     margin: 0 10 10 10;
 }
 
 mode-switcher {
     margin: 0 10 10 10;
-    border-radius: 5;
+    border-radius: 8;
     spacing: 10;
     padding: 10;
     background-color: @bg0;
@@ -58,7 +58,7 @@ mode-switcher {
 
 button {
     padding: 8;
-    border-radius: 5;
+    border-radius: 8;
     background-color: transparent;
     text-color: @fg0;
     cursor: pointer;
@@ -75,7 +75,7 @@ listview {
     margin: 0 10 10 10;
     padding: 12 12 12 12;
     spacing: 8;
-    border-radius: 5;
+    border-radius: 8;
     border: 0;
     border-color: @bg0;
     background-color: @bg0;
@@ -85,7 +85,7 @@ listview {
 
 scrollbar {
     width: 6px;
-    border-radius: 5;
+    border-radius: 8;
     handle-width: 6px;
     handle-color: @grey0;
     background-color: @bg1;
@@ -114,7 +114,7 @@ prompt {
 element {
     padding: 8 12;
     vertical-align: 0.5;
-    border-radius: 5;
+    border-radius: 8;
     background-color: transparent;
 }
 
