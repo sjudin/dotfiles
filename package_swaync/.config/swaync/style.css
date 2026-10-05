@@ -1,11 +1,11 @@
 :root {
-  --border-radius: 22px;
+  --border-radius: 8px;
   --cc-bg: transparent;
 
   --widget-background: rgba(46, 46, 46, 0.7);
   --noti-bg-alpha: 0.6;
 
-  --padding: calc(var(--border-radius) / 2);
+  --padding: 10px;
 }
 
 .control-center {
@@ -17,7 +17,7 @@
 .widget-mpris > box > button {
   background: var(--widget-background);
   border-radius: var(--border-radius);
-  padding: calc(var(--border-radius) / 2);
+  padding: var(--padding);
   border: var(--border);
 }
 
