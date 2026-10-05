@@ -1,4 +1,5 @@
 gwt-sync() {
+    emulate -L zsh
     local create_new=false
 
     # Check for the -b flag and shift arguments if found
@@ -29,41 +30,117 @@ gwt-sync() {
       return 1
     fi
 
+    # Resolve both paths before doing repository-root-relative operations.
+    target_path=${target_path:a}
+    local repo_root
+    repo_root=$(git -c core.fsmonitor=false rev-parse --show-toplevel) || return 1
+
+    local tracked_output untracked_output selected_output patch
+    local -a changed_files untracked_files selected_files tracked_paths copy_files
+    local file picker_status
+    tracked_output=$(git -c core.fsmonitor=false -C "$repo_root" diff \
+      --name-only --no-renames -z HEAD --) || return 1
+    untracked_output=$(git -c core.fsmonitor=false -C "$repo_root" ls-files \
+      --others --exclude-standard -z) || return 1
+    [[ -n "$tracked_output" ]] && changed_files=("${(@0)${tracked_output%$'\0'}}")
+    [[ -n "$untracked_output" ]] && untracked_files=("${(@0)${untracked_output%$'\0'}}")
+
+    if (( ${#changed_files} + ${#untracked_files} )); then
+      if ! command -v fzf >/dev/null; then
+        echo "❌ Error: fzf is required to select files to carry over."
+        return 1
+      fi
+      # fzf normally accepts the hovered row when nothing is selected.
+      # Override Enter so only explicit Tab selections are carried over.
+      selected_output=$(printf '%s\0' "${changed_files[@]}" "${untracked_files[@]}" |
+        FZF_DEFAULT_OPTS= FZF_DEFAULT_OPTS_FILE= fzf --read0 --print0 --multi \
+          --prompt='Carry over> ' \
+          --header='Tab: select files | Enter: carry selected | Enter with none / Esc: clean worktree' \
+          --bind='enter:transform:if [ "$FZF_SELECT_COUNT" -eq 0 ]; then echo abort; else echo accept; fi')
+      picker_status=$?
+      case $picker_status in
+        0) [[ -n "$selected_output" ]] && selected_files=("${(@0)${selected_output%$'\0'}}") ;;
+        1|130) ;; # No match or cancelled picker means no local files carried over.
+        *) echo "❌ Error: file picker failed"; return 1 ;;
+      esac
+    fi
+
+    for file in "${selected_files[@]}"; do
+      if (( ${untracked_files[(Ie)$file]} )); then
+        copy_files+=("$file")
+      else
+        tracked_paths+=(":(literal)$file")
+      fi
+    done
+    # Combine staged and unstaged changes, leaving them unstaged at the target.
+    # Disable rename detection so each selected path is independent.
+    if (( ${#tracked_paths} )); then
+      patch=$(git -c core.fsmonitor=false -C "$repo_root" diff --binary \
+        --no-ext-diff --no-textconv --no-renames HEAD -- "${tracked_paths[@]}") || return 1
+    fi
+
     if [ "$create_new" = true ]; then
         echo "🌿 Creating NEW branch '$branch' at $target_path..."
         
         # Branch off of base_branch if provided, otherwise branch from HEAD
         if [ -n "$base_branch" ]; then
             echo "   (Branching off of: $base_branch)"
-            if ! git worktree add -b "$branch" "$target_path" "$base_branch"; then
+            if ! git -c core.fsmonitor=false worktree add -b "$branch" "$target_path" "$base_branch"; then
               echo "❌ Error: git worktree command failed"
               return 1
             fi
         else
-            if ! git worktree add -b "$branch" "$target_path"; then
+            if ! git -c core.fsmonitor=false worktree add -b "$branch" "$target_path"; then
               echo "❌ Error: git worktree command failed"
               return 1
             fi
         fi
     else
         echo "Checking out existing branch '$branch' at $target_path..."
-        if ! git worktree add "$target_path" "$branch"; then
+        if ! git -c core.fsmonitor=false worktree add "$target_path" "$branch"; then
           echo "❌ Error: git worktree command failed"
           return 1
         fi
     fi
 
-    local untracked_count=$(git ls-files --others --exclude-standard | wc -l)
+    # Check every untracked destination before applying any tracked changes.
+    local destination parent
+    for file in "${copy_files[@]}"; do
+      destination="$target_path/$file"
+      if [[ -e "$destination" || -L "$destination" ]]; then
+        echo "❌ Error: '$file' already exists in the target; nothing copied."
+        echo "   The new worktree remains at $target_path."
+        return 1
+      fi
+      parent=${destination:h}
+      while [[ "$parent" != "$target_path" ]]; do
+        if [[ -L "$parent" || ( -e "$parent" && ! -d "$parent" ) ]]; then
+          echo "❌ Error: unsafe destination directory '$parent'; nothing copied."
+          echo "   The new worktree remains at $target_path."
+          return 1
+        fi
+        parent=${parent:h}
+      done
+    done
 
-    if [ "$untracked_count" -gt 0 ]; then
-      if ! git ls-files --others --exclude-standard -z | xargs -0 -I {} cp --parents {} "$target_path/"; then 
-        echo "❌ Error: copying untracked files failed"
+    if [[ -n "$patch" ]]; then
+      if ! print -r -- "$patch" | git -c core.fsmonitor=false -C "$target_path" apply --check; then
+        echo "❌ Error: selected changes do not apply; nothing copied."
+        echo "   The new worktree remains at $target_path."
+        return 1
+      fi
+      if ! print -r -- "$patch" | git -c core.fsmonitor=false -C "$target_path" apply; then
+        echo "❌ Error: applying selected changes failed. Worktree: $target_path"
         return 1
       fi
     fi
-
-    git -C "${target_path}" status > /dev/null 2>&1
-    echo "✅ Successfully created and synced."
+    if (( ${#copy_files} )); then
+      if ! (cd "$repo_root" && cp -P --parents -- "${copy_files[@]}" "$target_path/"); then
+        echo "❌ Error: copying selected untracked files failed; target may be partially synced."
+        return 1
+      fi
+    fi
+    echo "✅ Successfully created worktree; carried over ${#selected_files} selected file(s)."
 
     # ==========================================
     # TMUX INTEGRATION
